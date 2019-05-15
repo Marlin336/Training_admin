@@ -6,14 +6,14 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Training_admin"
         mc:Ignorable="d"
-        Title="Money_win" Height="365" Width="360">
-    <Grid Background="LightGray" MinWidth="352" MinHeight="334">
+        Title="Money_win" Height="390" Width="420" MinWidth="420" MinHeight="390">
+    <Grid Background="LightGray">
         <Label x:Name="l_cust" Content="Пользователь: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="l_admin" Content="Администратор: " HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
-        <xctk:IntegerUpDown x:Name="num_money" Margin="65,62,0,0" HorizontalAlignment="Left" Width="111" Minimum="1" DefaultValue="1" Height="26" VerticalAlignment="Top" DisplayDefaultValueOnEmptyText="True" />
-        <TextBlock x:Name="tb_descript" Margin="10,119,10,10" TextWrapping="Wrap" Background="White"/>
-        <Label x:Name="l_admin_Copy" Content="Сумма:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="50"/>
+        <xctk:IntegerUpDown x:Name="num_money" Margin="81,62,0,0" HorizontalAlignment="Left" Width="141" Minimum="1" DefaultValue="1" Height="26" VerticalAlignment="Top" DisplayDefaultValueOnEmptyText="True" />
+        <Label x:Name="l_admin_Copy" Content="Значение:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="66"/>
         <Label x:Name="l_admin_Copy1" Content="Описание:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" Width="71"/>
-
+        <Button x:Name="b_accept" Content="Принять" Margin="10,0,10,10" VerticalAlignment="Bottom" Height="31"/>
+        <TextBox Margin="10,114,10,46" TextWrapping="Wrap" Text="TextBox"/>
     </Grid>
 </Window>
