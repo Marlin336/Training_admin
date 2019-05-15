@@ -57,5 +57,41 @@ namespace Training_admin
 			logout = true;
 			Close();
 		}
+
+		private void Mb_log_Click(object sender, RoutedEventArgs e)
+		{
+			View_win log_win = new View_win()
+			{
+				Title = "Журнал посещений"
+			};
+			log_win.Show();
+		}
+
+		private void Mb_trans_Click(object sender, RoutedEventArgs e)
+		{
+			View_win trans_win = new View_win()
+			{
+				Title = "Журнал денежных транзакций"
+			};
+			trans_win.Show();
+		}
+
+		private void Mb_add_Click(object sender, RoutedEventArgs e)
+		{
+			Money_win add_money = new Money_win(true)
+			{
+				Title = "Начисление денег"
+			};
+			add_money.Show();
+		}
+
+		private void Mb_take_Click(object sender, RoutedEventArgs e)
+		{
+			Money_win take_money = new Money_win(false)
+			{
+				Title = "Снятие денег"
+			};
+			take_money.Show();
+		}
 	}
 }

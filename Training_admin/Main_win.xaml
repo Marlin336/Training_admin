@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Training_admin"
         mc:Ignorable="d"
-        Title="Главное меню" Height="597" Width="799" MinWidth="374" MinHeight="332" Closing="Window_Closing">
+        Title="Главное меню" Height="597" Width="799" MinWidth="374" MinHeight="332" Closing="Window_Closing" WindowState="Maximized">
     <Grid>
-        <Menu Height="25" VerticalAlignment="Top">
-            <MenuItem x:Name="b_log" Header="Журналирование" Height="25">
-                <MenuItem Header="Журнал посещений"/>
-                <MenuItem Header="Журнал транзакций"/>
+        <Menu Background="White" Height="25" VerticalAlignment="Top">
+            <MenuItem Header="Журналирование" Height="25">
+                <MenuItem x:Name="mb_log" Header="Журнал посещений" Click="Mb_log_Click"/>
+                <MenuItem x:Name="mb_trans" Header="Журнал транзакций" Click="Mb_trans_Click"/>
             </MenuItem>
             <MenuItem x:Name="b_profile" Header="Профиль"/>
             <MenuItem x:Name="b_exit" Header="Выход" Click="B_exit_Click"/>
@@ -18,12 +18,25 @@
         <TabControl Margin="0,25,0,0">
             <TabItem Header="Клиенты">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_customer"/>
+                    <DataGrid x:Name="dg_customer" Margin="0,0,0,45"/>
+                    <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
+                        <MenuItem Header="Денежные операции" Height="40">
+                            <MenuItem x:Name="mb_add" Header="Добавить на счёт" Click="Mb_add_Click"/>
+                            <MenuItem x:Name="mb_take" Header="Снять со счёта" Click="Mb_take_Click"/>
+                        </MenuItem>
+                        <MenuItem x:Name="b_cust_enter" Header="Регистрация посещения"/>
+                    </Menu>
                 </Grid>
             </TabItem>
             <TabItem Header="Тренеры">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_trainer"/>
+                    <DataGrid x:Name="dg_trainer" Margin="0,0,0,45"/>
+                    <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
+                        <MenuItem Header="Добавить" Height="40"/>
+                        <MenuItem Header="Удалить"/>
+                        <MenuItem Header="Редактировать"/>
+                        <MenuItem Header="Посмотреть группы"/>
+                    </Menu>
                 </Grid>
             </TabItem>
             <TabItem Header="Группы">
