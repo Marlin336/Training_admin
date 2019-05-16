@@ -73,11 +73,23 @@
     <Compile Include="Login_win.xaml.cs">
       <DependentUpon>Login_win.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Log_win.xaml.cs">
+      <DependentUpon>Log_win.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Main_win.xaml.cs">
       <DependentUpon>Main_win.xaml</DependentUpon>
     </Compile>
     <Compile Include="Money_win.xaml.cs">
       <DependentUpon>Money_win.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Newtrainer_win.xaml.cs">
+      <DependentUpon>Newtrainer_win.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Passreq_win.xaml.cs">
+      <DependentUpon>Passreq_win.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Profile_win.xaml.cs">
+      <DependentUpon>Profile_win.xaml</DependentUpon>
     </Compile>
     <Compile Include="Reg_win.xaml.cs">
       <DependentUpon>Reg_win.xaml</DependentUpon>
@@ -93,11 +105,27 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Log_win.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Main_win.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Money_win.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Newtrainer_win.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Passreq_win.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profile_win.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

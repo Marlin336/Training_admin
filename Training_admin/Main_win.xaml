@@ -8,11 +8,8 @@
         Title="Главное меню" Height="597" Width="799" MinWidth="374" MinHeight="332" Closing="Window_Closing" WindowState="Maximized">
     <Grid>
         <Menu Background="White" Height="25" VerticalAlignment="Top">
-            <MenuItem Header="Журналирование" Height="25">
-                <MenuItem x:Name="mb_log" Header="Журнал посещений" Click="Mb_log_Click"/>
-                <MenuItem x:Name="mb_trans" Header="Журнал транзакций" Click="Mb_trans_Click"/>
-            </MenuItem>
-            <MenuItem x:Name="b_profile" Header="Профиль"/>
+            <MenuItem x:Name="mb_log_view" Header="Журналирование" Height="25" Click="Mb_log_view_Click"/>
+            <MenuItem x:Name="b_profile" Header="Профиль" Click="B_profile_Click"/>
             <MenuItem x:Name="b_exit" Header="Выход" Click="B_exit_Click"/>
         </Menu>
         <TabControl Margin="0,25,0,0">
@@ -32,10 +29,8 @@
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dg_trainer" Margin="0,0,0,45"/>
                     <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
-                        <MenuItem Header="Добавить" Height="40"/>
-                        <MenuItem Header="Удалить"/>
-                        <MenuItem Header="Редактировать"/>
-                        <MenuItem Header="Посмотреть группы"/>
+                        <MenuItem x:Name="mb_add_trainer" Header="Добавить" Height="40" Click="Mb_add_trainer_Click"/>
+                        <MenuItem x:Name="mb_del_trainer" Header="Удалить"/>
                     </Menu>
                 </Grid>
             </TabItem>

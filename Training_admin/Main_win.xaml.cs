@@ -93,5 +93,23 @@ namespace Training_admin
 			};
 			take_money.Show();
 		}
+
+		private void Mb_log_view_Click(object sender, RoutedEventArgs e)
+		{
+			Log_win log = new Log_win();
+			log.Show();
+		}
+
+		private void B_profile_Click(object sender, RoutedEventArgs e)
+		{
+			Profile_win profile = new Profile_win();
+			profile.Show();
+		}
+
+		private void Mb_add_trainer_Click(object sender, RoutedEventArgs e)
+		{
+			Newtrainer_win win = new Newtrainer_win();
+			win.Show();
+		}
 	}
 }

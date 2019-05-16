@@ -1,0 +1,27 @@
+﻿<Window x:Class="Training_admin.Log_win"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Training_admin"
+        mc:Ignorable="d"
+        Title="Журналирование" Height="450" Width="615">
+    <Grid>
+        <TabControl Margin="0,25,0,0">
+            <TabItem Header="Посещения">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Транзакции">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <TextBox x:Name="tb_search" Height="23" Foreground="DarkGray" TextWrapping="NoWrap"  Text="Поиск..." VerticalAlignment="Top" GotFocus="Tb_search_GotFocus" LostFocus="Tb_search_LostFocus"/>
+    </Grid>
+</Window>
