@@ -17,11 +17,11 @@
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dg_customer" Margin="0,0,0,45"/>
                     <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
-                        <MenuItem Header="Денежные операции" Height="40">
+                        <MenuItem Header="Денежные операции" Height="40" FontSize="14">
                             <MenuItem x:Name="mb_add" Header="Добавить на счёт" Click="Mb_add_Click"/>
                             <MenuItem x:Name="mb_take" Header="Снять со счёта" Click="Mb_take_Click"/>
                         </MenuItem>
-                        <MenuItem x:Name="b_cust_enter" Header="Регистрация посещения"/>
+                        <MenuItem x:Name="b_cust_enter" Header="Регистрация посещения" FontSize="14"/>
                     </Menu>
                 </Grid>
             </TabItem>

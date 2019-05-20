@@ -14,11 +14,11 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBox x:Name="tb_log" Height="23" Margin="81,25,30,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="Tb_log_TextChanged"/>
-        <Label Content="Пароль" HorizontalAlignment="Left" Margin="30,49,0,0" VerticalAlignment="Top" Height="27"/>
-        <Label Content="Логин" HorizontalAlignment="Left" Margin="36,21,0,0" VerticalAlignment="Top" Height="27"/>
+        <Label Content="Пароль" HorizontalAlignment="Left" Margin="23,49,0,0" VerticalAlignment="Top" Height="27" FontSize="14"/>
+        <Label Content="Логин" HorizontalAlignment="Left" Margin="27,22,0,0" VerticalAlignment="Top" Height="27" FontSize="14"/>
         <PasswordBox x:Name="tb_pass" Margin="81,53,30,0" VerticalAlignment="Top" Height="23" PasswordChanged="Tb_pass_PasswordChanged"/>
-        <Button x:Name="b_reg" Content="Регистрация" Height="40" VerticalContentAlignment="Center" Click="B_reg_Click" Margin="30,0,0,21" HorizontalAlignment="Left" Width="120" VerticalAlignment="Bottom" IsTabStop="False"/>
-        <Button x:Name="b_ent" Content="Вход" Height="40" IsEnabled="False" Click="B_ent_Click" Margin="0,0,30,21" HorizontalAlignment="Right" Width="120" VerticalAlignment="Bottom" IsDefault="True"/>
+        <Button x:Name="b_reg" Content="Регистрация" Height="40" VerticalContentAlignment="Center" Click="B_reg_Click" Margin="30,0,0,21" HorizontalAlignment="Left" Width="120" VerticalAlignment="Bottom" IsTabStop="False" FontSize="16"/>
+        <Button x:Name="b_ent" Content="Вход" Height="40" IsEnabled="False" Click="B_ent_Click" Margin="0,0,30,21" HorizontalAlignment="Right" Width="120" VerticalAlignment="Bottom" IsDefault="True" FontSize="16"/>
 
     </Grid>
 </Window>

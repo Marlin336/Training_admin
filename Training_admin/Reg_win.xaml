@@ -19,7 +19,7 @@
         <Label Content="Логин" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,111,0,0"/>
         <Label Content="Отчество" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,65,0,0"/>
         <Label Content="Фамилия" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,37,0,0"/>
-        <Button x:Name="b_reg" Content="Сохранить" Margin="10,0,10,11" Click="B_reg_Click" TabIndex="9" Height="48" VerticalAlignment="Bottom"/>
+        <Button x:Name="b_reg" Content="Сохранить" Margin="10,0,10,11" Click="B_reg_Click" TabIndex="9" Height="48" VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"/>
         <Separator Margin="10,96,10,0" Height="13" VerticalAlignment="Top"/>
 
     </Grid>

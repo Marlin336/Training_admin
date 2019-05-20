@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Подтверждение" Height="150" Width="283" ResizeMode="NoResize">
     <Grid>
-        <PasswordBox x:Name="tb_pass" Margin="10,28,10,0" Height="20" VerticalAlignment="Top"/>
-        <Label Content="Введите пароль:" HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="b_accept" Content="Подтвердить" IsDefault="True" Click="B_accept_Click" Margin="42,62,42,0" Height="38" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="tb_pass" Margin="10,36,10,0" Height="23" VerticalAlignment="Top"/>
+        <Label Content="Введите пароль:" HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Button x:Name="b_accept" Content="Подтвердить" IsDefault="True" Click="B_accept_Click" Margin="42,73,42,0" Height="38" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
     </Grid>
 </Window>
