@@ -19,12 +19,14 @@ namespace Training_admin
 	/// </summary>
 	public partial class Main_win : Window
 	{
+		public int user_id { get; }
 		private bool logout { set; get; } = false;
 		public Login_win super { get; private set; }
-		public Main_win(Login_win super)
+		public Main_win(Login_win super, int id)
 		{
 			InitializeComponent();
 			this.super = super;
+			user_id = id;
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
