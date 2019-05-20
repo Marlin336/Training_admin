@@ -55,6 +55,8 @@ namespace Training_admin
 					}
 					conn.Open();
 					comm.ExecuteNonQuery();
+					conn.Close();
+					Close();
 				}
 				catch (ArgumentNullException)
 				{
@@ -68,10 +70,7 @@ namespace Training_admin
 				{
 					MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
-				finally
-				{
-					conn.Close();
-				}
+
 			}
 			else
 				MessageBox.Show("Пароли не совпадают", "Ошибка подтверждение пароля", MessageBoxButton.OK, MessageBoxImage.Warning);
