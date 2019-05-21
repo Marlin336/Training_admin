@@ -114,6 +114,9 @@
     <Compile Include="Profile_win.xaml.cs">
       <DependentUpon>Profile_win.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Read_win.xaml.cs">
+      <DependentUpon>Read_win.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reg_win.xaml.cs">
       <DependentUpon>Reg_win.xaml</DependentUpon>
     </Compile>
@@ -149,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Profile_win.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Read_win.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

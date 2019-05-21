@@ -18,7 +18,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dg_transact" IsReadOnly="True">
+                    <DataGrid x:Name="dg_transact" IsReadOnly="True" MouseDoubleClick="Dg_transact_MouseDoubleClick">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="id" Visibility="Collapsed"/>
                             <DataGridTextColumn Binding="{Binding customer}" Header="Клиент"/>

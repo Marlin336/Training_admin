@@ -29,18 +29,27 @@ namespace Training_admin
 			this.adding = adding;
 			this.super = super;
 			list = super.dg_customer.SelectedItem as CustomList;
+			NpgsqlCommand comm = new NpgsqlCommand("select sname||' '||fname||' '||pname from my_own_admin(" + super.user_id + ")", super.conn);
+			super.conn.Open();
+			string admin = comm.ExecuteScalar().ToString();
+			comm = new NpgsqlCommand("select sname||' '||fname||' '||pname from customer_view_admin where id = " + list.id + "", super.conn);
+			string cust = comm.ExecuteScalar().ToString();
+			super.conn.Close();
+			l_admin.Content += admin;
+			l_cust.Content += cust;
 		}
 
 		private void B_accept_Click(object sender, RoutedEventArgs e)
 		{
 			int add_money = adding ? (int)num_money.Value : -(int)num_money.Value;
-			string sql = "INSERT INTO public.transact_log(customer_id, admin_id, addition, date, \"time\", description)	VALUES(" + list.id + ", " + super.user_id + ", " + add_money + ", '" + DateTime.Now.ToShortDateString() + "', '" + DateTime.Now.ToLongTimeString() + "', '" + tb_descript.Text + "'); ";
+			string sql = "CALL public.transfer_money(" + list.id + "," + add_money + ")";
 			NpgsqlCommand comm = new NpgsqlCommand(sql, super.conn);
 			try
 			{
 				super.conn.Open();
 				comm.ExecuteNonQuery();
-				comm = new NpgsqlCommand("CALL public.transfer_money(" + list.id + "," + add_money + ")", super.conn);
+				sql = "INSERT INTO public.transact_log(customer_id, admin_id, addition, date, \"time\", description) VALUES(" + list.id + ", " + super.user_id + ", " + add_money + ", '" + DateTime.Now.ToShortDateString() + "', '" + DateTime.Now.ToLongTimeString() + "', '" + tb_descript.Text + "'); ";
+				comm = new NpgsqlCommand(sql, super.conn);
 				comm.ExecuteNonQuery();
 				Close();
 			}
@@ -52,7 +61,11 @@ namespace Training_admin
 			{
 				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
 			}
-			finally { super.conn.Close(); }
+			finally
+			{
+				super.conn.Close();
+				super.UpdateCustomGrid();
+			}
 		}
 	}
 }

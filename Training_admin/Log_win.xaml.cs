@@ -33,12 +33,6 @@ namespace Training_admin
 				NpgsqlDataReader reader = comm.ExecuteReader();
 				for (int i = 0; reader.Read(); i++)
 				{
-					var a0 = reader.GetInt32(0);
-					var a1 = reader.GetString(1);
-					var a2 = reader.GetString(2);
-					var a3 = reader.GetInt32(3);
-					var a4 = reader.GetDate(4).ToString();
-					var a5 = reader.GetValue(5).ToString();
 					TransactList item = new TransactList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3), reader.GetDate(4).ToString(), reader.GetValue(5).ToString());
 					dg_transact.Items.Add(item);
 				}
@@ -76,6 +70,18 @@ namespace Training_admin
 				tb_search.Foreground = Brushes.DarkGray;
 				tb_search.Text = "Поиск...";
 			}
+		}
+
+		private void Dg_transact_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			TransactList item = dg_transact.SelectedItem as TransactList;
+			string sql = "select description from transact_log where id = " + item.id + "";
+			NpgsqlCommand comm = new NpgsqlCommand(sql, super.conn);
+			super.conn.Open();
+			var a = comm.ExecuteScalar().ToString();
+			Read_win read = new Read_win(comm.ExecuteScalar().ToString());
+			read.Show();
+			super.conn.Close();
 		}
 	}
 }
