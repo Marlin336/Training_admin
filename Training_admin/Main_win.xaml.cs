@@ -56,10 +56,14 @@ namespace Training_admin
 			}
 			conn.Close();
 		}
-		private void Mb_re_cust_Click(object sender, RoutedEventArgs e)
+		public void UpdateCustomGrid()
 		{
 			dg_customer.Items.Clear();
 			FillCustomerGrid();
+		}
+		private void Mb_re_cust_Click(object sender, RoutedEventArgs e)
+		{
+			UpdateCustomGrid();
 		}
 
 		private void FillTrainerGrid()
@@ -84,10 +88,14 @@ namespace Training_admin
 			}
 			conn.Close();
 		}
-		private void Mb_re_trainer_Click(object sender, RoutedEventArgs e)
+		public void UpdateTrainerGrid()
 		{
 			dg_trainer.Items.Clear();
 			FillTrainerGrid();
+		}
+		private void Mb_re_trainer_Click(object sender, RoutedEventArgs e)
+		{
+			UpdateTrainerGrid();
 		}
 
 		private void FillGroupGrid()
@@ -110,10 +118,14 @@ namespace Training_admin
 			}
 			conn.Close();
 		}
-		private void Mb_re_group_Click(object sender, RoutedEventArgs e)
+		public void UpdateGroupGrid()
 		{
 			dg_group.Items.Clear();
 			FillGroupGrid();
+		}
+		private void Mb_re_group_Click(object sender, RoutedEventArgs e)
+		{
+			UpdateGroupGrid();
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -149,7 +161,7 @@ namespace Training_admin
 
 		private void Mb_add_Click(object sender, RoutedEventArgs e)
 		{
-			Money_win add_money = new Money_win(true)
+			Money_win add_money = new Money_win(true, this)
 			{
 				Title = "Начисление денег"
 			};
@@ -158,7 +170,7 @@ namespace Training_admin
 
 		private void Mb_take_Click(object sender, RoutedEventArgs e)
 		{
-			Money_win take_money = new Money_win(false)
+			Money_win take_money = new Money_win(false, this)
 			{
 				Title = "Снятие денег"
 			};
@@ -167,7 +179,7 @@ namespace Training_admin
 
 		private void Mb_log_view_Click(object sender, RoutedEventArgs e)
 		{
-			Log_win log = new Log_win();
+			Log_win log = new Log_win(this);
 			log.Show();
 		}
 
@@ -219,6 +231,11 @@ namespace Training_admin
 				comm.ExecuteNonQuery();
 				conn.Close();
 			}
+		}
+
+		private void Dg_customer_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+		{
+			mb_money_op.IsEnabled = mb_cust_enter.IsEnabled = dg_customer.SelectedCells.Count != 0;
 		}
 	}
 }

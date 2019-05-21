@@ -41,17 +41,16 @@ namespace Training_admin
 				try
 				{
 					if (fname.Length == 0 || sname.Length == 0 || pname.Length == 0 || birth.Length == 0 || login.Length == 0 || pass.Length == 0)
-					{
 						throw new ArgumentNullException();
-					}
 					NpgsqlCommand comm = new NpgsqlCommand("INSERT INTO public.trainer(first_name, second_name, parent_name, birthday, e_mail, login, pass)" +
 		"VALUES('" + fname + "', '" + sname + "', '" + pname + "', '" + birth + "', '" + mail + "', '" + login + "', '" + pass + "'); ", super.conn);
 					super.conn.Open();
 					comm.ExecuteNonQuery();
-					comm = new NpgsqlCommand("CREATE USER \"" + login + "\" WITH	LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT - 1 PASSWORD '" + pass + "';" +
+					comm = new NpgsqlCommand("CREATE USER \"" + login + "\" WITH LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT - 1 PASSWORD '" + pass + "';" +
 					"GRANT \"Trainer\" TO \"" + login + "\"; ", super.conn);
 					comm.ExecuteNonQuery();
 					Close();
+					super.UpdateTrainerGrid();
 				}
 				catch (ArgumentNullException)
 				{
@@ -66,9 +65,7 @@ namespace Training_admin
 					MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 				}
 				finally
-				{
-					super.conn.Close();
-				}
+				{ super.conn.Close(); }
 			}
 			else
 				MessageBox.Show("Пароли не совпадают", "Ошибка подтверждение пароля", MessageBoxButton.OK, MessageBoxImage.Warning);

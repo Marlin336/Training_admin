@@ -18,7 +18,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dg_customer" Margin="0,0,0,45" FontSize="14" IsReadOnly="True" SelectionMode="Single">
+                    <DataGrid x:Name="dg_customer" Margin="0,0,0,45" FontSize="14" IsReadOnly="True" SelectionMode="Single" SelectedCellsChanged="Dg_customer_SelectedCellsChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="id" Visibility="Collapsed"/>
                             <DataGridTextColumn Binding="{Binding sname}" Header="Фамилия"/>
@@ -32,11 +32,11 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
-                        <MenuItem Header="Денежные операции" Height="40" FontSize="14">
+                        <MenuItem x:Name="mb_money_op" Header="Денежные операции" Height="40" FontSize="14" IsEnabled="False">
                             <MenuItem x:Name="mb_add" Header="Добавить на счёт" Click="Mb_add_Click"/>
                             <MenuItem x:Name="mb_take" Header="Снять со счёта" Click="Mb_take_Click"/>
                         </MenuItem>
-                        <MenuItem x:Name="mb_cust_enter" Header="Регистрация посещения" FontSize="14"/>
+                        <MenuItem x:Name="mb_cust_enter" Header="Регистрация посещения" FontSize="14" IsEnabled="False"/>
                         <MenuItem x:Name="mb_re_cust" Header="Обновить список" FontSize="14" Click="Mb_re_cust_Click"/>
                     </Menu>
                 </Grid>

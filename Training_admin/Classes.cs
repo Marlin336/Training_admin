@@ -70,4 +70,22 @@ namespace Training_admin
 			this.sub = sub;
 		}
 	}
+	public class TransactList
+	{
+		public int id { get; set; }
+		public string customer { get; set; }
+		public string admin { get; set; }
+		public int addition { get; set; }
+		public string date { get; set; }
+		public string time { get; set; }
+		public TransactList(int id, string customer, string admin, int addition, string date, string time)
+		{
+			this.id = id;
+			this.customer = customer;
+			this.admin = admin;
+			this.addition = addition;
+			this.date = date;
+			this.time = time;
+		}
+	}
 }

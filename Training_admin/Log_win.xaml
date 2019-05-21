@@ -10,7 +10,7 @@
         <TabControl Margin="0,25,0,0">
             <TabItem Header="Посещения">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid/>
+                    <DataGrid x:Name="dg_log" IsReadOnly="True"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Транзакции">
@@ -18,7 +18,16 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid/>
+                    <DataGrid x:Name="dg_transact" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding id}" Header="id" Visibility="Collapsed"/>
+                            <DataGridTextColumn Binding="{Binding customer}" Header="Клиент"/>
+                            <DataGridTextColumn Binding="{Binding admin}" Header="Администратор"/>
+                            <DataGridTextColumn Binding="{Binding addition}" Header="Сумма"/>
+                            <DataGridTextColumn Binding="{Binding date}" Header="Дата"/>
+                            <DataGridTextColumn Binding="{Binding time}" Header="Время"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
