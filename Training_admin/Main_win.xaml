@@ -15,7 +15,17 @@
         <TabControl Margin="0,25,0,0">
             <TabItem Header="Клиенты">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_customer" Margin="0,0,0,45"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="dg_customer" Margin="0,0,0,45">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding id}" Header="ID" Visibility="Collapsed"/>
+                            <DataGridTextColumn Binding="{Binding sname}" Header="Фамилия"/>
+                            <DataGridTextColumn Binding="{Binding fname}" Header="Имя"/>
+                            <DataGridTextColumn Binding="{Binding pname}" Header="Отчество"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
                         <MenuItem Header="Денежные операции" Height="40" FontSize="14">
                             <MenuItem x:Name="mb_add" Header="Добавить на счёт" Click="Mb_add_Click"/>
@@ -29,8 +39,8 @@
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dg_trainer" Margin="0,0,0,45"/>
                     <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
-                        <MenuItem x:Name="mb_add_trainer" Header="Добавить" Height="40" Click="Mb_add_trainer_Click"/>
-                        <MenuItem x:Name="mb_del_trainer" Header="Удалить"/>
+                        <MenuItem x:Name="mb_add_trainer" Header="Добавить" Height="40" Click="Mb_add_trainer_Click" FontSize="14"/>
+                        <MenuItem x:Name="mb_del_trainer" Header="Удалить" FontSize="14"/>
                     </Menu>
                 </Grid>
             </TabItem>

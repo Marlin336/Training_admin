@@ -11,9 +11,33 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Npgsql;
 
 namespace Training_admin
 {
+	class CustomList
+	{
+		public int id { get; set; }
+		public string fname { get; set; }
+		public string sname { get; set; }
+		public string pname { get; set; }
+		public string birthday { get; set; }
+		public string mail { get; set; }
+		public string login { get; set; }
+		public int deposit { get; set; }
+		public CustomList(int id, string sname, string fname, string pname, string birthday, string mail, int dep, string login)
+		{
+			this.id = id;
+			this.fname = fname;
+			this.sname = sname;
+			this.pname = pname;
+			this.birthday = birthday;
+			this.mail = mail;
+			this.login = login;
+			deposit = dep;
+		}
+	}
+
 	/// <summary>
 	/// Логика взаимодействия для Main_win.xaml
 	/// </summary>
@@ -22,11 +46,37 @@ namespace Training_admin
 		public int user_id { get; }
 		private bool logout { set; get; } = false;
 		public Login_win super { get; private set; }
-		public Main_win(Login_win super, int id)
+		public NpgsqlConnection conn;
+		public Main_win(Login_win super, int id, string login, string password)
 		{
 			InitializeComponent();
 			this.super = super;
 			user_id = id;
+			string str = "Server = 127.0.0.1; Port = 5432; User Id = " + login + "; Password = " + password + "; Database = Training;";
+			conn = new NpgsqlConnection(str);
+			NpgsqlCommand comm = new NpgsqlCommand("select * from customer_view_admin", conn);
+			NpgsqlDataReader reader;
+			try
+			{
+				conn.Open();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+				throw;
+			}
+			reader = comm.ExecuteReader();
+			for (int i = 0; reader.Read(); i++)
+			{
+				CustomList item = new CustomList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), reader.GetValue(5).ToString(), reader.GetInt32(6), reader.GetString(7));
+				dg_customer.Items.Add(item);
+			}
+			conn.Close();
+		}
+
+		private void FillCustomerGrid()
+		{
+
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

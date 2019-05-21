@@ -62,7 +62,7 @@ namespace Training_admin
 				}
 				else
 				{
-					Main_win main = new Main_win(this, result);
+					Main_win main = new Main_win(this, result, tb_log.Text, tb_pass.Password);
 					main.Show();
 					Hide();
 				}

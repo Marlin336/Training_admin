@@ -46,14 +46,19 @@ namespace Training_admin
 	"first_name, second_name, parent_name, login, pass)" +
 	"VALUES('" + tb_name.Text.Trim() + "', '" + tb_sname.Text.Trim() + "', '" + tb_pname.Text.Trim() + "', '" + tb_login.Text + "', '" + tb_pass.Password + "');";
 				NpgsqlConnection conn = new NpgsqlConnection(conn_param);
-				NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+				NpgsqlCommand comm;
 				try
 				{					
 					if (tb_name.Text.Trim().Length == 0 || tb_sname.Text.Trim().Length == 0 || tb_pname.Text.Trim().Length == 0 || tb_login.Text.Length == 0 || tb_pass.Password.Length == 0)
 					{
 						throw new ArgumentNullException();
 					}
+					
 					conn.Open();
+					comm = new NpgsqlCommand(sql, conn);
+					comm.ExecuteNonQuery();
+					comm = new NpgsqlCommand("CREATE USER \"" + tb_login.Text + "\" WITH LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT - 1 PASSWORD '" + tb_pass.Password + "';" +
+					"GRANT \"Admin\" TO \"" + tb_login.Text + "\";", conn);
 					comm.ExecuteNonQuery();
 					conn.Close();
 					Close();
