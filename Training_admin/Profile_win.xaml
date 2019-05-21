@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Профиль" Height="143" Width="381" ResizeMode="NoResize">
     <Grid>
-        <Label x:Name="l_name" Content="Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label x:Name="l_login" Content="login" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="l_name" Content="Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
+        <Label x:Name="l_login" Content="login" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" FontSize="14"/>
         <Button x:Name="b_edit" Content="Редактировать" Margin="0,0,10,10" Height="34" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120" Click="B_edit_Click" FontSize="14"/>
 
     </Grid>

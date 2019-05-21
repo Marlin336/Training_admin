@@ -11,7 +11,7 @@
         <TextBox x:Name="tb_pname" Height="23" Margin="77,68,10,0" TextWrapping="Wrap" VerticalAlignment="Top" TabIndex="3"/>
         <TextBox x:Name="tb_sname" Height="23" Margin="77,40,10,0" TextWrapping="Wrap" VerticalAlignment="Top" TabIndex="2"/>
         <TextBox x:Name="tb_login" Height="23" Margin="102,114,10,0" TextWrapping="Wrap" VerticalAlignment="Top" TabIndex="6"/>
-        <PasswordBox x:Name="tb_pass" Margin="102,142,10,0" VerticalAlignment="Top" Height="23" TabIndex="7"/>
+        <PasswordBox x:Name="tb_pass" Margin="102,142,10,0" VerticalAlignment="Top" Height="23" TabIndex="7" GotFocus="Tb_pass_GotFocus"/>
         <PasswordBox x:Name="tb_repass" Margin="102,170,10,0" VerticalAlignment="Top" Height="23" TabIndex="8"/>
         <Label Content="Имя" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="39,9,0,0"/>
         <Label Content="Повтор пароля" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3,167,0,0"/>

@@ -20,20 +20,23 @@ namespace Training_admin
 	/// </summary>
 	public partial class Reg_win : Window
 	{
-		private bool edit { get; }
-		public Reg_win(bool editing)
+		public Reg_win()
 		{
 			InitializeComponent();
-			edit = editing;
-			if(edit)
-			{
-				Title = "Редактирование";
-				b_reg.Click += B_edit_Click;
-			}
-			else
-			{
-				b_reg.Click += B_reg_Click;
-			}
+			b_reg.Click += B_reg_Click;
+		}
+
+		public Reg_win(string fname, string sname, string pname, string login, string pass)
+		{
+			InitializeComponent();
+			Title = "Редактирование";
+			b_reg.Click += B_edit_Click;
+			tb_name.Text = fname;
+			tb_sname.Text = sname;
+			tb_pname.Text = pname;
+			tb_login.Text = login;
+			tb_pass.Password = pass;
+			tb_repass.Password = pass;
 		}
 
 		//  При регистрации нового профиля
@@ -52,8 +55,7 @@ namespace Training_admin
 					if (tb_name.Text.Trim().Length == 0 || tb_sname.Text.Trim().Length == 0 || tb_pname.Text.Trim().Length == 0 || tb_login.Text.Length == 0 || tb_pass.Password.Length == 0)
 					{
 						throw new ArgumentNullException();
-					}
-					
+					}				
 					conn.Open();
 					comm = new NpgsqlCommand(sql, conn);
 					comm.ExecuteNonQuery();
@@ -93,6 +95,11 @@ namespace Training_admin
 			}
 			else
 				MessageBox.Show("Пароли не совпадают", "Ошибка подтверждение пароля", MessageBoxButton.OK, MessageBoxImage.Warning);
+		}
+
+		private void Tb_pass_GotFocus(object sender, RoutedEventArgs e)
+		{
+			tb_repass.Clear();
 		}
 	}
 }

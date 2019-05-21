@@ -32,6 +32,8 @@ namespace Training_admin
 			string str = "Server = 127.0.0.1; Port = 5432; User Id = " + login + "; Password = " + password + "; Database = Training;";
 			conn = new NpgsqlConnection(str);
 			FillCustomerGrid();
+			FillTrainerGrid();
+			FillGroupGrid();
 		}
 
 		private void FillCustomerGrid()
@@ -51,16 +53,10 @@ namespace Training_admin
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message);
-				throw;
 			}
 			conn.Close();
 		}
 		private void Mb_re_cust_Click(object sender, RoutedEventArgs e)
-		{
-			dg_customer.Items.Clear();
-			FillCustomerGrid();
-		}
-		private void Tab_cust_GotFocus(object sender, RoutedEventArgs e)
 		{
 			dg_customer.Items.Clear();
 			FillCustomerGrid();
@@ -83,16 +79,10 @@ namespace Training_admin
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message);
-				throw;
 			}
 			conn.Close();
 		}
 		private void Mb_re_trainer_Click(object sender, RoutedEventArgs e)
-		{
-			dg_trainer.Items.Clear();
-			FillTrainerGrid();
-		}
-		private void Tab_trainer_GotFocus(object sender, RoutedEventArgs e)
 		{
 			dg_trainer.Items.Clear();
 			FillTrainerGrid();
@@ -115,14 +105,8 @@ namespace Training_admin
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message);
-				throw;
 			}
 			conn.Close();
-		}
-		private void Tab_group_GotFocus(object sender, RoutedEventArgs e)
-		{
-			dg_group.Items.Clear();
-			FillGroupGrid();
 		}
 		private void Mb_re_group_Click(object sender, RoutedEventArgs e)
 		{
@@ -187,8 +171,26 @@ namespace Training_admin
 
 		private void B_profile_Click(object sender, RoutedEventArgs e)
 		{
-			Profile_win profile = new Profile_win();
-			profile.Show();
+			NpgsqlCommand comm = new NpgsqlCommand("select sname||' '||fname||' '||pname, login from my_own_admin(" + user_id + ")", conn);
+			NpgsqlDataReader reader;
+			string name = null, login = null;
+			try
+			{
+				conn.Open();
+				reader = comm.ExecuteReader();
+				for (int i = 0; reader.Read(); i++)
+				{
+					name = reader.GetString(0);
+					login = reader.GetString(1);
+				}
+				Profile_win profile = new Profile_win(this, name, login);
+				profile.Show();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+			conn.Close();
 		}
 
 		private void Mb_add_trainer_Click(object sender, RoutedEventArgs e)

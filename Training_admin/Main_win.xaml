@@ -13,12 +13,12 @@
             <MenuItem x:Name="b_exit" Header="Выход" Click="B_exit_Click"/>
         </Menu>
         <TabControl Margin="0,25,0,0">
-            <TabItem x:Name="tab_cust" Header="Клиенты" GotFocus="Tab_cust_GotFocus">
+            <TabItem x:Name="tab_cust" Header="Клиенты">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dg_customer" Margin="0,0,0,45" FontSize="14" IsReadOnly="True">
+                    <DataGrid x:Name="dg_customer" Margin="0,0,0,45" FontSize="14" IsReadOnly="True" SelectionMode="Single">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="id" Visibility="Collapsed"/>
                             <DataGridTextColumn Binding="{Binding sname}" Header="Фамилия"/>
@@ -41,9 +41,9 @@
                     </Menu>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tab_trainer" Header="Тренеры" GotFocus="Tab_trainer_GotFocus">
+            <TabItem x:Name="tab_trainer" Header="Тренеры">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_trainer" Margin="0,0,0,45" FontSize="14">
+                    <DataGrid x:Name="dg_trainer" Margin="0,0,0,45" FontSize="14" IsReadOnly="True" SelectionMode="Single">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="id" Visibility="Collapsed"/>
                             <DataGridTextColumn Binding="{Binding sname}" Header="Фамилия"/>
@@ -62,9 +62,9 @@
                     </Menu>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tab_group" Header="Группы" GotFocus="Tab_group_GotFocus">
+            <TabItem x:Name="tab_group" Header="Группы">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_group" Margin="0,0,0,45" FontSize="14">
+                    <DataGrid x:Name="dg_group" Margin="0,0,0,45" FontSize="14" IsReadOnly="True" SelectionMode="Single">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="id" Visibility="Collapsed"/>
                             <DataGridTextColumn Binding="{Binding trainer}" Header="Тренер"/>
