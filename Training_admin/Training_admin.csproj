@@ -92,6 +92,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes.cs" />
     <Compile Include="Login_win.xaml.cs">
       <DependentUpon>Login_win.xaml</DependentUpon>
     </Compile>

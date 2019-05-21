@@ -13,17 +13,22 @@
             <MenuItem x:Name="b_exit" Header="Выход" Click="B_exit_Click"/>
         </Menu>
         <TabControl Margin="0,25,0,0">
-            <TabItem Header="Клиенты">
+            <TabItem x:Name="tab_cust" Header="Клиенты" GotFocus="Tab_cust_GotFocus">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dg_customer" Margin="0,0,0,45">
+                    <DataGrid x:Name="dg_customer" Margin="0,0,0,45" FontSize="14" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding id}" Header="ID" Visibility="Collapsed"/>
+                            <DataGridTextColumn Binding="{Binding id}" Header="id" Visibility="Collapsed"/>
                             <DataGridTextColumn Binding="{Binding sname}" Header="Фамилия"/>
                             <DataGridTextColumn Binding="{Binding fname}" Header="Имя"/>
                             <DataGridTextColumn Binding="{Binding pname}" Header="Отчество"/>
+                            <DataGridTextColumn Binding="{Binding birthday}" Header="Дата рождения"/>
+                            <DataGridTextColumn Binding="{Binding mail}" Header="Эл. почта"/>
+                            <DataGridTextColumn Binding="{Binding deposit}" Header="Счёт"/>
+                            <DataGridTextColumn Binding="{Binding login}" Header="Логин"/>
+                            <DataGridCheckBoxColumn Binding="{Binding isEnter}" Header="На занятиях"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
@@ -31,22 +36,47 @@
                             <MenuItem x:Name="mb_add" Header="Добавить на счёт" Click="Mb_add_Click"/>
                             <MenuItem x:Name="mb_take" Header="Снять со счёта" Click="Mb_take_Click"/>
                         </MenuItem>
-                        <MenuItem x:Name="b_cust_enter" Header="Регистрация посещения" FontSize="14"/>
+                        <MenuItem x:Name="mb_cust_enter" Header="Регистрация посещения" FontSize="14"/>
+                        <MenuItem x:Name="mb_re_cust" Header="Обновить список" FontSize="14" Click="Mb_re_cust_Click"/>
                     </Menu>
                 </Grid>
             </TabItem>
-            <TabItem Header="Тренеры">
+            <TabItem x:Name="tab_trainer" Header="Тренеры" GotFocus="Tab_trainer_GotFocus">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_trainer" Margin="0,0,0,45"/>
+                    <DataGrid x:Name="dg_trainer" Margin="0,0,0,45" FontSize="14">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding id}" Header="id" Visibility="Collapsed"/>
+                            <DataGridTextColumn Binding="{Binding sname}" Header="Фамилия"/>
+                            <DataGridTextColumn Binding="{Binding fname}" Header="Имя"/>
+                            <DataGridTextColumn Binding="{Binding pname}" Header="Отчество"/>
+                            <DataGridTextColumn Binding="{Binding birthday}" Header="Дата рождения"/>
+                            <DataGridTextColumn Binding="{Binding mail}" Header="Эл. почта"/>
+                            <DataGridTextColumn Binding="{Binding login}" Header="Логин"/>
+                            <DataGridTextColumn Binding="{Binding grpcnt}" Header="Кол-во групп"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
                         <MenuItem x:Name="mb_add_trainer" Header="Добавить" Height="40" Click="Mb_add_trainer_Click" FontSize="14"/>
                         <MenuItem x:Name="mb_del_trainer" Header="Удалить" FontSize="14"/>
+                        <MenuItem x:Name="mb_re_trainer" Header="Обновить список" FontSize="14" Click="Mb_re_trainer_Click"/>
                     </Menu>
                 </Grid>
             </TabItem>
-            <TabItem Header="Группы">
+            <TabItem x:Name="tab_group" Header="Группы" GotFocus="Tab_group_GotFocus">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_group"/>
+                    <DataGrid x:Name="dg_group" Margin="0,0,0,45" FontSize="14">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding id}" Header="id" Visibility="Collapsed"/>
+                            <DataGridTextColumn Binding="{Binding trainer}" Header="Тренер"/>
+                            <DataGridTextColumn Binding="{Binding min_age}" Header="Мин. возраст"/>
+                            <DataGridTextColumn Binding="{Binding max_age}" Header="Макс. возраст"/>
+                            <DataGridTextColumn Binding="{Binding cost}" Header="Стоимость занятия"/>
+                            <DataGridTextColumn Binding="{Binding sub}" Header="Кол-во участников"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
+                        <MenuItem x:Name="mb_re_group" Header="Обновить список" FontSize="14" Height="40" Click="Mb_re_group_Click"/>
+                    </Menu>
                 </Grid>
             </TabItem>
         </TabControl>

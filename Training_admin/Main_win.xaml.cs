@@ -15,29 +15,6 @@ using Npgsql;
 
 namespace Training_admin
 {
-	class CustomList
-	{
-		public int id { get; set; }
-		public string fname { get; set; }
-		public string sname { get; set; }
-		public string pname { get; set; }
-		public string birthday { get; set; }
-		public string mail { get; set; }
-		public string login { get; set; }
-		public int deposit { get; set; }
-		public CustomList(int id, string sname, string fname, string pname, string birthday, string mail, int dep, string login)
-		{
-			this.id = id;
-			this.fname = fname;
-			this.sname = sname;
-			this.pname = pname;
-			this.birthday = birthday;
-			this.mail = mail;
-			this.login = login;
-			deposit = dep;
-		}
-	}
-
 	/// <summary>
 	/// Логика взаимодействия для Main_win.xaml
 	/// </summary>
@@ -54,29 +31,103 @@ namespace Training_admin
 			user_id = id;
 			string str = "Server = 127.0.0.1; Port = 5432; User Id = " + login + "; Password = " + password + "; Database = Training;";
 			conn = new NpgsqlConnection(str);
+			FillCustomerGrid();
+		}
+
+		private void FillCustomerGrid()
+		{
 			NpgsqlCommand comm = new NpgsqlCommand("select * from customer_view_admin", conn);
 			NpgsqlDataReader reader;
 			try
 			{
 				conn.Open();
+				reader = comm.ExecuteReader();
+				for (int i = 0; reader.Read(); i++)
+				{
+					CustomList item = new CustomList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), reader.GetValue(5).ToString(), reader.GetInt32(6), reader.GetString(7), i%2==0);
+					dg_customer.Items.Add(item);
+				}
 			}
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message);
 				throw;
 			}
-			reader = comm.ExecuteReader();
-			for (int i = 0; reader.Read(); i++)
+			conn.Close();
+		}
+		private void Mb_re_cust_Click(object sender, RoutedEventArgs e)
+		{
+			dg_customer.Items.Clear();
+			FillCustomerGrid();
+		}
+		private void Tab_cust_GotFocus(object sender, RoutedEventArgs e)
+		{
+			dg_customer.Items.Clear();
+			FillCustomerGrid();
+		}
+
+		private void FillTrainerGrid()
+		{
+			NpgsqlCommand comm = new NpgsqlCommand("select * from trainer_view_admin", conn);
+			NpgsqlDataReader reader;
+			try
 			{
-				CustomList item = new CustomList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), reader.GetValue(5).ToString(), reader.GetInt32(6), reader.GetString(7));
-				dg_customer.Items.Add(item);
+				conn.Open();
+				reader = comm.ExecuteReader();
+				for (int i = 0; reader.Read(); i++)
+				{
+					TrainerList item = new TrainerList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), reader.GetValue(5).ToString(), reader.GetString(6), reader.GetInt32(7));
+					dg_trainer.Items.Add(item);
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+				throw;
 			}
 			conn.Close();
 		}
-
-		private void FillCustomerGrid()
+		private void Mb_re_trainer_Click(object sender, RoutedEventArgs e)
 		{
+			dg_trainer.Items.Clear();
+			FillTrainerGrid();
+		}
+		private void Tab_trainer_GotFocus(object sender, RoutedEventArgs e)
+		{
+			dg_trainer.Items.Clear();
+			FillTrainerGrid();
+		}
 
+		private void FillGroupGrid()
+		{
+			NpgsqlCommand comm = new NpgsqlCommand("select * from group_view_admin", conn);
+			NpgsqlDataReader reader;
+			try
+			{
+				conn.Open();
+				reader = comm.ExecuteReader();
+				for (int i = 0; reader.Read(); i++)
+				{
+					GroupList item = new GroupList(reader.GetInt32(0), reader.GetString(1), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetInt32(4), reader.GetInt32(5));
+					dg_group.Items.Add(item);
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+				throw;
+			}
+			conn.Close();
+		}
+		private void Tab_group_GotFocus(object sender, RoutedEventArgs e)
+		{
+			dg_group.Items.Clear();
+			FillGroupGrid();
+		}
+		private void Mb_re_group_Click(object sender, RoutedEventArgs e)
+		{
+			dg_group.Items.Clear();
+			FillGroupGrid();
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -108,24 +159,6 @@ namespace Training_admin
 		{
 			logout = true;
 			Close();
-		}
-
-		private void Mb_log_Click(object sender, RoutedEventArgs e)
-		{
-			View_win log_win = new View_win()
-			{
-				Title = "Журнал посещений"
-			};
-			log_win.Show();
-		}
-
-		private void Mb_trans_Click(object sender, RoutedEventArgs e)
-		{
-			View_win trans_win = new View_win()
-			{
-				Title = "Журнал денежных транзакций"
-			};
-			trans_win.Show();
 		}
 
 		private void Mb_add_Click(object sender, RoutedEventArgs e)
