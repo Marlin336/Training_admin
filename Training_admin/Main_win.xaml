@@ -43,7 +43,7 @@
             </TabItem>
             <TabItem x:Name="tab_trainer" Header="Тренеры">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_trainer" Margin="0,0,0,45" FontSize="14" IsReadOnly="True" SelectionMode="Single">
+                    <DataGrid x:Name="dg_trainer" Margin="0,0,0,45" FontSize="14" IsReadOnly="True" SelectionMode="Single" SelectedCellsChanged="Dg_trainer_SelectedCellsChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="id" Visibility="Collapsed"/>
                             <DataGridTextColumn Binding="{Binding sname}" Header="Фамилия"/>
@@ -57,7 +57,7 @@
                     </DataGrid>
                     <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
                         <MenuItem x:Name="mb_add_trainer" Header="Добавить" Height="40" Click="Mb_add_trainer_Click" FontSize="14"/>
-                        <MenuItem x:Name="mb_del_trainer" Header="Удалить" FontSize="14"/>
+                        <MenuItem x:Name="mb_del_trainer" Header="Удалить" FontSize="14" IsEnabled="False" Click="Mb_del_trainer_Click"/>
                         <MenuItem x:Name="mb_re_trainer" Header="Обновить список" FontSize="14" Click="Mb_re_trainer_Click"/>
                     </Menu>
                 </Grid>

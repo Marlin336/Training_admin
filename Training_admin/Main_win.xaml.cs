@@ -29,8 +29,8 @@ namespace Training_admin
 			InitializeComponent();
 			this.super = super;
 			user_id = id;
-			string str = "Server = 127.0.0.1; Port = 5432; User Id = " + login + "; Password = " + password + "; Database = Training;";
-			conn = new NpgsqlConnection(str);
+			string conn_str = "Server = 127.0.0.1; Port = 5432; User Id = " + login + "; Password = " + password + "; Database = Training;";
+			conn = new NpgsqlConnection(conn_str);
 			FillCustomerGrid();
 			FillTrainerGrid();
 			FillGroupGrid();
@@ -72,7 +72,9 @@ namespace Training_admin
 				reader = comm.ExecuteReader();
 				for (int i = 0; reader.Read(); i++)
 				{
-					TrainerList item = new TrainerList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), reader.GetValue(5).ToString(), reader.GetString(6), reader.GetInt32(7));
+					int count;
+					try { count = reader.GetInt32(7); } catch { count = 0; }
+					TrainerList item = new TrainerList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), reader.GetValue(5).ToString(), reader.GetString(6), count);
 					dg_trainer.Items.Add(item);
 				}
 			}
@@ -195,8 +197,28 @@ namespace Training_admin
 
 		private void Mb_add_trainer_Click(object sender, RoutedEventArgs e)
 		{
-			Newtrainer_win win = new Newtrainer_win();
+			Newtrainer_win win = new Newtrainer_win(this);
 			win.Show();
+		}
+
+		private void Dg_trainer_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+		{
+			mb_del_trainer.IsEnabled = dg_trainer.SelectedCells.Count != 0;
+		}
+
+		private void Mb_del_trainer_Click(object sender, RoutedEventArgs e)
+		{
+			if(MessageBox.Show("Вы уверенны что хотите удалить этого тренера из базы данных?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
+			{
+				TrainerList list = dg_trainer.SelectedItem as TrainerList;
+				string sql = "drop role \"" + list.login + "\"";
+				NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+				conn.Open();
+				comm.ExecuteNonQuery();
+				comm = new NpgsqlCommand("DELETE FROM public.trainer WHERE id = " + list.id + "; ", conn);
+				comm.ExecuteNonQuery();
+				conn.Close();
+			}
 		}
 	}
 }

@@ -10,8 +10,8 @@
         <TextBox x:Name="tb_name" HorizontalAlignment="Left" Height="23" Margin="77,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" TabIndex="1"/>
         <TextBox x:Name="tb_pname" HorizontalAlignment="Left" Height="23" Margin="77,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" TabIndex="3"/>
         <TextBox x:Name="tb_sname" HorizontalAlignment="Left" Height="23" Margin="77,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" TabIndex="2"/>
-        <DatePicker x:Name="date_birth" HorizontalAlignment="Left" Margin="111,96,0,0" VerticalAlignment="Top" Width="162" DisplayDate="2000-01-01" TabIndex="4" IsTabStop="True"/>
-        <TextBox x:Name="tb_phone" HorizontalAlignment="Left" Height="23" Margin="79,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" TabIndex="5"/>
+        <DatePicker x:Name="date_birth" HorizontalAlignment="Left" Margin="111,96,0,0" VerticalAlignment="Top" Width="162" TabIndex="4" IsTabStop="True" Text="01.01.1970" DisplayDate="1970-01-01"/>
+        <TextBox x:Name="tb_mail" HorizontalAlignment="Left" Height="23" Margin="79,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" TabIndex="5"/>
         <TextBox x:Name="tb_login" HorizontalAlignment="Left" Height="23" Margin="102,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" TabIndex="6"/>
         <PasswordBox x:Name="tb_pass" HorizontalAlignment="Left" Margin="102,203,0,0" VerticalAlignment="Top" Width="171" Height="23" TabIndex="7"/>
         <PasswordBox x:Name="tb_repass" HorizontalAlignment="Left" Margin="102,231,0,0" VerticalAlignment="Top" Width="171" Height="23" TabIndex="8"/>
@@ -23,7 +23,7 @@
         <Label Content="Дата рождения" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,94,0,0"/>
         <Label Content="Отчество" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="11,65,0,0"/>
         <Label Content="Фамилия" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,37,0,0"/>
-        <Button x:Name="b_reg" Content="Сохранить" Margin="10,268,10,10" TabIndex="9" FontSize="16" FontWeight="Bold"/>
+        <Button x:Name="b_reg" Content="Сохранить" Margin="10,268,10,10" TabIndex="9" FontSize="16" FontWeight="Bold" Click="B_reg_Click"/>
         <Separator Margin="10,153,0,0" HorizontalAlignment="Left" Width="277" Height="22" VerticalAlignment="Top"/>
         <Label Content="*" HorizontalAlignment="Left" Margin="272,35,0,0" VerticalAlignment="Top" Foreground="#FFF70505" Height="28" ToolTip="Важное поле"/>
         <Label Content="*" HorizontalAlignment="Left" Margin="272,7,0,0" VerticalAlignment="Top" Foreground="#FFF70505" Height="28" ToolTip="Важное поле"/>
