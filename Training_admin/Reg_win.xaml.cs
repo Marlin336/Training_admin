@@ -20,22 +20,31 @@ namespace Training_admin
 	/// </summary>
 	public partial class Reg_win : Window
 	{
+		Profile_win profile = null;
+		int user_id;
+		string fname = null;
+		string sname = null;
+		string pname = null;
+		string login = null;
+		string pass = null;
 		public Reg_win()
 		{
 			InitializeComponent();
 			b_reg.Click += B_reg_Click;
 		}
 
-		public Reg_win(string fname, string sname, string pname, string login, string pass)
+		public Reg_win(Profile_win profile, int id, string fname, string sname, string pname, string login, string pass)
 		{
 			InitializeComponent();
 			Title = "Редактирование";
 			b_reg.Click += B_edit_Click;
-			tb_name.Text = fname;
-			tb_sname.Text = sname;
-			tb_pname.Text = pname;
-			tb_login.Text = login;
-			tb_pass.Password = pass;
+			this.profile = profile;
+			user_id = id;
+			tb_name.Text = this.fname = fname;
+			tb_sname.Text = this.sname = sname;
+			tb_pname.Text = this.pname = pname;
+			tb_login.Text = this.login = login;
+			tb_pass.Password = this.pass = pass;
 			tb_repass.Password = pass;
 		}
 
@@ -88,10 +97,30 @@ namespace Training_admin
 		{
 			if (tb_pass.Password == tb_repass.Password)
 			{
-				// TODO
-				// Попытка регистрации
-
-				//Проблема неверно заполненных полей должна обрабатываться сервером
+				string conn_param = "Server=127.0.0.1;Port=5432;User Id=postgres;Password=0000;Database=Training;";
+				string sql = "UPDATE admin SET first_name='" + tb_name.Text + "', second_name='" + tb_sname.Text + "', parent_name='" + tb_pname.Text + "', login='" + tb_login.Text + "', pass='" + tb_pass.Password + "' WHERE id =" + user_id + "";
+				NpgsqlConnection conn = new NpgsqlConnection(conn_param);
+				NpgsqlCommand comm;
+				try
+				{
+					if (tb_name.Text.Trim().Length == 0 || tb_sname.Text.Trim().Length == 0 || tb_pname.Text.Trim().Length == 0 || tb_login.Text.Length == 0 || tb_pass.Password.Length == 0)
+					{
+						throw new ArgumentNullException();
+					}
+					conn.Open();
+					comm = new NpgsqlCommand(sql, conn);
+					comm.ExecuteNonQuery();
+					comm = new NpgsqlCommand("ALTER USER \""+login+"\" RENAME TO \""+tb_login.Text+"\"; ALTER USER \""+tb_login.Text+"\" PASSWORD '"+tb_pass.Password+"'; ", conn);
+					comm.ExecuteNonQuery();
+					conn.Close();
+					profile.l_name.Content = tb_sname.Text + " " + tb_name.Text + " " + tb_pname.Text;
+					profile.l_login.Content = "Логин: " + tb_login.Text;
+					Close();
+				}
+				catch (ArgumentNullException)
+				{
+					MessageBox.Show("Необходимые поля не заполнены", "Ошибка регистрации", MessageBoxButton.OK, MessageBoxImage.Asterisk, MessageBoxResult.OK);
+				}
 			}
 			else
 				MessageBox.Show("Пароли не совпадают", "Ошибка подтверждение пароля", MessageBoxButton.OK, MessageBoxImage.Warning);

@@ -21,10 +21,12 @@ namespace Training_admin
     public partial class Passreq_win : Window
     {
 		int user_id;
+		Profile_win profile { get; }
 		public Main_win super { get; }
-        public Passreq_win(Main_win super, int id)
+        public Passreq_win(Main_win super, Profile_win profile ,int id)
         {
             InitializeComponent();
+			this.profile = profile;
 			this.super = super;
 			user_id = id;
         }
@@ -42,7 +44,7 @@ namespace Training_admin
 					comm = new NpgsqlCommand("select * from my_own_admin(" + user_id + ")", super.conn);
 					reader = comm.ExecuteReader();
 					reader.Read();
-					Reg_win edit = new Reg_win(reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5));
+					Reg_win edit = new Reg_win(profile, reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5));
 					Close();
 					edit.ShowDialog();
 				}

@@ -30,7 +30,7 @@ namespace Training_admin
 
 		private void B_edit_Click(object sender, RoutedEventArgs e)
 		{
-			Passreq_win req = new Passreq_win(super, super.user_id);
+			Passreq_win req = new Passreq_win(super, this ,super.user_id);
 			req.Show();
 		}
 	}
