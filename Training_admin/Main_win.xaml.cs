@@ -237,5 +237,16 @@ namespace Training_admin
 		{
 			mb_money_op.IsEnabled = mb_cust_enter.IsEnabled = dg_customer.SelectedCells.Count != 0;
 		}
+
+		private void Mb_cust_enter_Click(object sender, RoutedEventArgs e)
+		{
+			CustomList sel_cust = dg_customer.SelectedItem as CustomList;
+			string sql = "select count(*) from log_view where customer_id = " + sel_cust.id + " and out_time is null";
+			NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
+			conn.Open();
+			//int 
+			View_win win = new View_win(this, sel_cust.id);
+			win.Show();
+		}
 	}
 }

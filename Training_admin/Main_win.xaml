@@ -36,7 +36,7 @@
                             <MenuItem x:Name="mb_add" Header="Добавить на счёт" Click="Mb_add_Click"/>
                             <MenuItem x:Name="mb_take" Header="Снять со счёта" Click="Mb_take_Click"/>
                         </MenuItem>
-                        <MenuItem x:Name="mb_cust_enter" Header="Регистрация посещения" FontSize="14" IsEnabled="False"/>
+                        <MenuItem x:Name="mb_cust_enter" Header="Регистрация посещения" FontSize="14" IsEnabled="False" Click="Mb_cust_enter_Click"/>
                         <MenuItem x:Name="mb_re_cust" Header="Обновить список" FontSize="14" Click="Mb_re_cust_Click"/>
                     </Menu>
                 </Grid>

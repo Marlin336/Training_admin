@@ -42,14 +42,11 @@ namespace Training_admin
 		private void B_accept_Click(object sender, RoutedEventArgs e)
 		{
 			int add_money = adding ? (int)num_money.Value : -(int)num_money.Value;
-			string sql = "CALL public.transfer_money(" + list.id + "," + add_money + ")";
+			string sql = "CALL public.trans_money(" + list.id + ", " + super.user_id + ", " + add_money + ", '" + tb_descript.Text + "')";
 			NpgsqlCommand comm = new NpgsqlCommand(sql, super.conn);
 			try
 			{
 				super.conn.Open();
-				comm.ExecuteNonQuery();
-				sql = "INSERT INTO public.transact_log(customer_id, admin_id, addition, date, \"time\", description) VALUES(" + list.id + ", " + super.user_id + ", " + add_money + ", '" + DateTime.Now.ToShortDateString() + "', '" + DateTime.Now.ToLongTimeString() + "', '" + tb_descript.Text + "'); ";
-				comm = new NpgsqlCommand(sql, super.conn);
 				comm.ExecuteNonQuery();
 				Close();
 			}

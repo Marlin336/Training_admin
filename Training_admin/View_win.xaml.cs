@@ -19,9 +19,16 @@ namespace Training_admin
 	/// </summary>
 	public partial class View_win : Window
 	{
-		public View_win()
+		Main_win super { get; }
+		public View_win(Main_win super, int customer_id)
 		{
 			InitializeComponent();
+			this.super = super;
+		}
+
+		private void FillTable(int c_id)
+		{
+
 		}
 	}
 }
