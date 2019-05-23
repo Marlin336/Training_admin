@@ -43,7 +43,7 @@ namespace Training_admin
 
 		private void B_ent_Click(object sender, RoutedEventArgs e)
 		{
-			string conn_param = "Server=127.0.0.1;Port=5432;User Id=postgres;Password=0000;Database=Training;";
+			string conn_param = "Server=127.0.0.1;Port=5432;User Id=Training_login;Password=0000;Database=Training;";
 			string sql = "select login_admin('" + tb_log.Text + "', '" + tb_pass.Password + "')";
 			NpgsqlConnection conn = new NpgsqlConnection(conn_param);
 			NpgsqlCommand comm = new NpgsqlCommand(sql, conn);

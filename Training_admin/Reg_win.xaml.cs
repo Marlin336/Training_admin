@@ -53,7 +53,7 @@ namespace Training_admin
 		{
 			if (tb_pass.Password == tb_repass.Password)
 			{
-				string conn_param = "Server=127.0.0.1;Port=5432;User Id=postgres;Password=0000;Database=Training;";
+				string conn_param = "Server=127.0.0.1;Port=5432;User Id=Training_login;Password=0000;Database=Training;";
 				string sql = "INSERT INTO public.admin(" +
 	"first_name, second_name, parent_name, login, pass)" +
 	"VALUES('" + tb_name.Text.Trim() + "', '" + tb_sname.Text.Trim() + "', '" + tb_pname.Text.Trim() + "', '" + tb_login.Text + "', '" + tb_pass.Password + "');";
@@ -97,7 +97,7 @@ namespace Training_admin
 		{
 			if (tb_pass.Password == tb_repass.Password)
 			{
-				string conn_param = "Server=127.0.0.1;Port=5432;User Id=postgres;Password=0000;Database=Training;";
+				string conn_param = "Server=127.0.0.1;Port=5432;User Id=Training_login;Password=0000;Database=Training;";
 				string sql = "UPDATE admin SET first_name='" + tb_name.Text + "', second_name='" + tb_sname.Text + "', parent_name='" + tb_pname.Text + "', login='" + tb_login.Text + "', pass='" + tb_pass.Password + "' WHERE id =" + user_id + "";
 				NpgsqlConnection conn = new NpgsqlConnection(conn_param);
 				NpgsqlCommand comm;
