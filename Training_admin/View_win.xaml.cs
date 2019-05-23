@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Npgsql;
 
 namespace Training_admin
 {
@@ -24,11 +25,25 @@ namespace Training_admin
 		{
 			InitializeComponent();
 			this.super = super;
+			FillTable(customer_id);
 		}
 
 		private void FillTable(int c_id)
 		{
+			string sql = "select * from customer_subs(" + c_id + ")";
+			NpgsqlCommand comm = new NpgsqlCommand(sql, super.conn);
+			super.conn.Open();
+			NpgsqlDataReader reader = comm.ExecuteReader();
+			for (int i = 0; reader.Read(); i++)
+			{
+				GroupList item = new GroupList(reader.GetInt32(0), reader.GetString(1), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetInt32(4), reader.GetInt32(5));
+				dg.Items.Add(item);
+			}
+		}
 
+		private void Dg_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			string sql = "";
 		}
 	}
 }

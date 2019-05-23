@@ -47,30 +47,6 @@ namespace Training_admin
 			}
 			finally { super.conn.Close(); }
 		}
-		public Log_win(string search, Main_win super)
-		{
-			InitializeComponent();
-			this.tb_search.Text = search;
-			this.super = super;
-		}
-
-		private void Tb_search_GotFocus(object sender, RoutedEventArgs e)
-		{
-			if(tb_search.Foreground == Brushes.DarkGray)
-			{
-				tb_search.Foreground = Brushes.Black;
-				tb_search.Clear();
-			}
-		}
-
-		private void Tb_search_LostFocus(object sender, RoutedEventArgs e)
-		{
-			if(tb_search.Text == "")
-			{
-				tb_search.Foreground = Brushes.DarkGray;
-				tb_search.Text = "Поиск...";
-			}
-		}
 
 		private void Dg_transact_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{

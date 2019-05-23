@@ -48,7 +48,7 @@ namespace Training_admin
 			NpgsqlConnection conn = new NpgsqlConnection(conn_param);
 			NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 			conn.Open();
-			int result = int.Parse(comm.ExecuteScalar().ToString());
+			int result = (int)comm.ExecuteScalar();
 			conn.Close();
 			if (result == -1)
 			{

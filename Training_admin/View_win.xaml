@@ -5,9 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Training_admin"
         mc:Ignorable="d"
-        Title="View_win" Height="450" Width="498.404">
+        Title="View_win" Height="450" Width="797.404">
     <Grid>
-        <DataGrid Margin="10"/>
-
+        <DataGrid x:Name="dg" FontSize="14" IsReadOnly="True" SelectionMode="Single" MouseDoubleClick="Dg_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding id}" Header="Код группы"/>
+                <DataGridTextColumn Binding="{Binding trainer}" Header="Тренер"/>
+                <DataGridTextColumn Binding="{Binding min_age}" Header="Мин. возраст"/>
+                <DataGridTextColumn Binding="{Binding max_age}" Header="Макс. возраст"/>
+                <DataGridTextColumn Binding="{Binding cost}" Header="Стоимость занятия"/>
+                <DataGridTextColumn Binding="{Binding sub}" Header="Кол-во участников"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

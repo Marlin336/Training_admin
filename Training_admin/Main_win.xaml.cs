@@ -46,7 +46,7 @@ namespace Training_admin
 				reader = comm.ExecuteReader();
 				for (int i = 0; reader.Read(); i++)
 				{
-					CustomList item = new CustomList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), reader.GetValue(5).ToString(), reader.GetInt32(6), reader.GetString(7), i%2==0);
+					CustomList item = new CustomList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), reader.GetValue(5).ToString(), reader.GetInt32(6), reader.GetString(7), reader.GetBoolean(8));
 					dg_customer.Items.Add(item);
 				}
 			}
@@ -241,12 +241,44 @@ namespace Training_admin
 		private void Mb_cust_enter_Click(object sender, RoutedEventArgs e)
 		{
 			CustomList sel_cust = dg_customer.SelectedItem as CustomList;
-			string sql = "select count(*) from log_view where customer_id = " + sel_cust.id + " and out_time is null";
+			string sql = "select customer_in("+ sel_cust.id + ")";
 			NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
-			conn.Open();
-			//int 
-			View_win win = new View_win(this, sel_cust.id);
-			win.Show();
+			try
+			{
+				conn.Open();
+				bool enter = (bool)comm.ExecuteScalar();
+				conn.Close();
+				if (enter)//Клиент внутри
+				{
+					comm = new NpgsqlCommand("select cust_in_gr from log_view where customer_id = " + sel_cust.id + " and out_time is null", conn);
+					conn.Open();
+					int cust_id = (int)comm.ExecuteScalar();
+					conn.Close();
+					sql = "UPDATE public.log SET out_time = '" + DateTime.Now.ToLongTimeString() + "' WHERE id_customer_in_group = " + cust_id + " and out_time is null; ";
+					comm = new NpgsqlCommand(sql, conn);
+					conn.Open();
+					comm.ExecuteNonQuery();
+					conn.Close();
+					UpdateCustomGrid();
+				}
+				else
+				{
+					View_win win = new View_win(this, sel_cust.id)
+					{
+						Title = sel_cust.sname + " " + sel_cust.fname + " " + sel_cust.pname
+					};
+					win.Show();
+				}
+			}
+			catch (NpgsqlException ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка на сервере", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+			}
+			finally { conn.Close(); }
 		}
 	}
 }
