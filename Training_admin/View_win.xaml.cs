@@ -21,14 +21,16 @@ namespace Training_admin
 	public partial class View_win : Window
 	{
 		Main_win super { get; }
+		int c_id { get; }
 		public View_win(Main_win super, int customer_id)
 		{
 			InitializeComponent();
 			this.super = super;
-			FillTable(customer_id);
+			c_id = customer_id;
+			FillTable();
 		}
 
-		private void FillTable(int c_id)
+		private void FillTable()
 		{
 			string sql = "select * from customer_subs(" + c_id + ")";
 			NpgsqlCommand comm = new NpgsqlCommand(sql, super.conn);
@@ -43,7 +45,32 @@ namespace Training_admin
 
 		private void Dg_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			string sql = "";
+			GroupList group = dg.SelectedItem as GroupList;
+			string sql = "CALL public.reg_entrance(" + c_id + ", " + group.id + ", " + super.user_id + ", " + group.cost + ", 'Оплата посещения занятия')";
+			NpgsqlCommand comm = new NpgsqlCommand(sql, super.conn);
+			try
+			{
+				super.conn.Open();
+				comm.ExecuteNonQuery();
+				super.conn.Close();
+				Close();
+			}
+			catch (NpgsqlException ex)
+			{
+				if (ex.ErrorCode == -2147467259)
+					MessageBox.Show("Недостаточно денег на счету", "Ошибка на сервере", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+				else
+					MessageBox.Show(ex.Message, "Ошибка на сервере", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+			}
+			finally
+			{
+				super.conn.Close();
+				super.UpdateCustomGrid();
+			}
 		}
 	}
 }

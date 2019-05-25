@@ -52,7 +52,10 @@ namespace Training_admin
 			}
 			catch (NpgsqlException ex)
 			{
-				MessageBox.Show(ex.Message, "Ошибка на сервере", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+				if (ex.ErrorCode == -2147467259)
+					MessageBox.Show("Счёт пользователя не может быть отрицательным", "Ошибка на сервере", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+				else
+					MessageBox.Show(ex.Message, "Ошибка на сервере", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
 			}
 			catch (Exception ex)
 			{
