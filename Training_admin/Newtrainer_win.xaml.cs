@@ -50,6 +50,7 @@ namespace Training_admin
 					"GRANT \"Trainer\" TO \"" + login + "\"; ", super.conn);
 					comm.ExecuteNonQuery();
 					Close();
+					super.conn.Close();
 					super.UpdateTrainerGrid();
 				}
 				catch (ArgumentNullException)

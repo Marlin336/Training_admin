@@ -50,6 +50,7 @@
                             <DataGridTextColumn Binding="{Binding fname}" Header="Имя"/>
                             <DataGridTextColumn Binding="{Binding pname}" Header="Отчество"/>
                             <DataGridTextColumn Binding="{Binding birthday}" Header="Дата рождения"/>
+                            <DataGridTextColumn Binding="{Binding age}" Header="Возраст"/>
                             <DataGridTextColumn Binding="{Binding mail}" Header="Эл. почта"/>
                             <DataGridTextColumn Binding="{Binding login}" Header="Логин"/>
                             <DataGridTextColumn Binding="{Binding grpcnt}" Header="Кол-во групп"/>

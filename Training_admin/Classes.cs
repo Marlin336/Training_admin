@@ -37,16 +37,18 @@ namespace Training_admin
 		public string sname { get; set; }
 		public string pname { get; set; }
 		public string birthday { get; set; }
+		public int age { get; set; }
 		public string mail { get; set; }
 		public string login { get; set; }
 		public int grpcnt { get; set; }
-		public TrainerList(int id, string sname, string fname, string pname, string birthday, string mail, string login, int grpcnt)
+		public TrainerList(int id, string sname, string fname, string pname, string birthday, int age, string mail, string login, int grpcnt)
 		{
 			this.id = id;
 			this.fname = fname;
 			this.sname = sname;
 			this.pname = pname;
 			this.birthday = birthday;
+			this.age = age;
 			this.mail = mail;
 			this.login = login;
 			this.grpcnt = grpcnt;

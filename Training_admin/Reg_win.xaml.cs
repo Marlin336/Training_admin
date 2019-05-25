@@ -71,6 +71,7 @@ namespace Training_admin
 					comm = new NpgsqlCommand("CREATE USER \"" + tb_login.Text + "\" WITH LOGIN NOSUPERUSER NOCREATEDB CREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT - 1 PASSWORD '" + tb_pass.Password + "';" +
 					"GRANT \"Admin\" TO \"" + tb_login.Text + "\";", conn);
 					comm.ExecuteNonQuery();
+					conn.Close();
 					Close();
 				}
 				catch (ArgumentNullException)
