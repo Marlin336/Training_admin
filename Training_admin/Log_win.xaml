@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Training_admin"
         mc:Ignorable="d"
-        Title="Журналирование" Height="496" Width="615">
+        Title="Журналирование" Height="496" Width="703">
     <Grid>
         <TabControl x:Name="tab_panel">
             <TabItem x:Name="tab_log" Header="Посещения">

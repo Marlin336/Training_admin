@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -129,12 +130,13 @@ namespace Training_admin
 		{
 			Dispatcher.BeginInvoke((Action)(() => tab_panel.SelectedItem = tab_transact));
 			LogList selected = dg_log.SelectedItem as LogList;
-			foreach (TransactList item in dg_transact.Items)
+			for (int i = 0; i < dg_transact.Items.Count; i++)
 			{
+				TransactList item = dg_transact.Items[i] as TransactList;
 				if (item.id == selected.transact_id)
 				{
-					dg_log.SelectedItem = item;
-					dg_log.ScrollIntoView(item);
+					dg_transact.SelectedIndex = i;
+					dg_transact.ScrollIntoView(dg_transact.Items[i]);
 					break;
 				}
 			}
