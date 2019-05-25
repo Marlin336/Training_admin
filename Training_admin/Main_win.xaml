@@ -25,9 +25,9 @@
                             <DataGridTextColumn Binding="{Binding fname}" Header="Имя"/>
                             <DataGridTextColumn Binding="{Binding pname}" Header="Отчество"/>
                             <DataGridTextColumn Binding="{Binding birthday}" Header="Дата рождения"/>
+                            <DataGridTextColumn Binding="{Binding age}" Header="Возраст"/>
                             <DataGridTextColumn Binding="{Binding mail}" Header="Эл. почта"/>
                             <DataGridTextColumn Binding="{Binding deposit}" Header="Счёт"/>
-                            <DataGridTextColumn Binding="{Binding login}" Header="Логин"/>
                             <DataGridCheckBoxColumn Binding="{Binding isEnter}" Header="На занятиях"/>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -58,6 +58,7 @@
                     <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
                         <MenuItem x:Name="mb_add_trainer" Header="Добавить" Height="40" Click="Mb_add_trainer_Click" FontSize="14"/>
                         <MenuItem x:Name="mb_del_trainer" Header="Удалить" FontSize="14" IsEnabled="False" Click="Mb_del_trainer_Click"/>
+                        <MenuItem x:Name="mb_trainer_groups" Header="Просмотреть группы" FontSize="14" IsEnabled="False" Click="Mb_trainer_groups_Click"/>
                         <MenuItem x:Name="mb_re_trainer" Header="Обновить список" FontSize="14" Click="Mb_re_trainer_Click"/>
                     </Menu>
                 </Grid>
@@ -67,6 +68,7 @@
                     <DataGrid x:Name="dg_group" Margin="0,0,0,45" FontSize="14" IsReadOnly="True" SelectionMode="Single">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="Код группы"/>
+                            <DataGridTextColumn Binding="{Binding trainer_id}" Header="tr_id" Visibility="Collapsed"/>
                             <DataGridTextColumn Binding="{Binding trainer}" Header="Тренер"/>
                             <DataGridTextColumn Binding="{Binding min_age}" Header="Мин. возраст"/>
                             <DataGridTextColumn Binding="{Binding max_age}" Header="Макс. возраст"/>
@@ -75,6 +77,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
+                        <MenuItem x:Name="mb_gr_subs" Header="Список подписавшихся" FontSize="14" Height="40" Click="Mb_gr_subs_Click"/>
                         <MenuItem x:Name="mb_re_group" Header="Обновить список" FontSize="14" Height="40" Click="Mb_re_group_Click"/>
                     </Menu>
                 </Grid>

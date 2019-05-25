@@ -46,7 +46,7 @@ namespace Training_admin
 				reader = comm.ExecuteReader();
 				for (int i = 0; reader.Read(); i++)
 				{
-					CustomList item = new CustomList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), reader.GetValue(5).ToString(), reader.GetInt32(6), reader.GetString(7), reader.GetBoolean(8));
+					CustomList item = new CustomList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), (int)reader.GetDouble(5), reader.GetValue(6).ToString(), reader.GetInt32(7), reader.GetBoolean(8));
 					dg_customer.Items.Add(item);
 				}
 			}
@@ -108,7 +108,7 @@ namespace Training_admin
 				reader = comm.ExecuteReader();
 				for (int i = 0; reader.Read(); i++)
 				{
-					GroupList item = new GroupList(reader.GetInt32(0), reader.GetString(1), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), reader.GetInt32(4), reader.GetInt32(5));
+					GroupList item = new GroupList(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetInt32(5), reader.GetInt32(6));
 					dg_group.Items.Add(item);
 				}
 			}
@@ -215,7 +215,7 @@ namespace Training_admin
 
 		private void Dg_trainer_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
 		{
-			mb_del_trainer.IsEnabled = dg_trainer.SelectedCells.Count != 0;
+			mb_del_trainer.IsEnabled = mb_trainer_groups.IsEnabled = dg_trainer.SelectedCells.Count != 0;
 		}
 
 		private void Mb_del_trainer_Click(object sender, RoutedEventArgs e)
@@ -263,7 +263,7 @@ namespace Training_admin
 				}
 				else
 				{
-					View_win win = new View_win(this, sel_cust.id)
+					View_win win = new View_win(this, typeof(CustomList), sel_cust.id)
 					{
 						Title = sel_cust.sname + " " + sel_cust.fname + " " + sel_cust.pname
 					};
@@ -279,6 +279,26 @@ namespace Training_admin
 				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
 			}
 			finally { conn.Close(); }
+		}
+
+		private void Mb_trainer_groups_Click(object sender, RoutedEventArgs e)
+		{
+			TrainerList sel_tr = dg_trainer.SelectedItem as TrainerList;
+			View_win win = new View_win(this, typeof(TrainerList), sel_tr.id)
+			{
+				Title = sel_tr.sname + " " + sel_tr.fname + " " + sel_tr.pname
+			};
+			win.Show();
+		}
+
+		private void Mb_gr_subs_Click(object sender, RoutedEventArgs e)
+		{
+			GroupList sel_gr = dg_group.SelectedItem as GroupList;
+			View_win win = new View_win(this, typeof(GroupList), sel_gr.id)
+			{
+				Title = "Код группы: " + sel_gr.id
+			};
+			win.Show();
 		}
 	}
 }

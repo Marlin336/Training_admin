@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="View_win" Height="450" Width="797.404">
     <Grid>
-        <DataGrid x:Name="dg" FontSize="14" IsReadOnly="True" SelectionMode="Single" MouseDoubleClick="Dg_MouseDoubleClick">
+        <DataGrid x:Name="dg_customer" FontSize="14" IsReadOnly="True" SelectionMode="Single" Visibility="Collapsed" MouseDoubleClick="Dg_customer_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Header="Код группы"/>
                 <DataGridTextColumn Binding="{Binding trainer}" Header="Тренер"/>
@@ -15,6 +15,27 @@
                 <DataGridTextColumn Binding="{Binding max_age}" Header="Макс. возраст"/>
                 <DataGridTextColumn Binding="{Binding cost}" Header="Стоимость занятия"/>
                 <DataGridTextColumn Binding="{Binding sub}" Header="Кол-во участников"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="dg_trainer" FontSize="14" IsReadOnly="True" SelectionMode="Single" Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding id}" Header="Код группы"/>
+                <DataGridTextColumn Binding="{Binding min_age}" Header="Мин. возраст"/>
+                <DataGridTextColumn Binding="{Binding max_age}" Header="Макс. возраст"/>
+                <DataGridTextColumn Binding="{Binding cost}" Header="Стоимость занятия"/>
+                <DataGridTextColumn Binding="{Binding sub}" Header="Кол-во участников"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="dg_group" FontSize="14" IsReadOnly="True" SelectionMode="Single" Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding sname}" Header="Фамилия"/>
+                <DataGridTextColumn Binding="{Binding fname}" Header="Имя"/>
+                <DataGridTextColumn Binding="{Binding pname}" Header="Отчество"/>
+                <DataGridTextColumn Binding="{Binding birthday}" Header="Дата рождения"/>
+                <DataGridTextColumn Binding="{Binding age}" Header="Возраст"/>
+                <DataGridTextColumn Binding="{Binding mail}" Header="Эл. почта"/>
+                <DataGridTextColumn Binding="{Binding deposit}" Header="Счёт"/>
+                <DataGridCheckBoxColumn Binding="{Binding isEnter}" Header="На занятиях"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

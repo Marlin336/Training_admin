@@ -13,19 +13,19 @@ namespace Training_admin
 		public string sname { get; set;}
 		public string pname { get; set; }
 		public string birthday { get; set; }
+		public int age { get; set; }
 		public string mail { get; set; }
-		public string login { get; set; }
 		public int deposit { get; set; }
 		public bool isEnter { get; set; }
-		public CustomList(int id, string sname, string fname, string pname, string birthday, string mail, int dep, string login, bool enter)
+		public CustomList(int id, string sname, string fname, string pname, string birthday, int age, string mail, int dep, bool enter)
 		{
 			this.id = id;
 			this.fname = fname;
 			this.sname = sname;
 			this.pname = pname;
 			this.birthday = birthday;
+			this.age = age;
 			this.mail = mail;
-			this.login = login;
 			deposit = dep;
 			isEnter = enter;
 		}
@@ -55,11 +55,22 @@ namespace Training_admin
 	public class GroupList
 	{
 		public int id { get; set; }
+		public int trainer_id { get; set; }
 		public string trainer { get; set; }
 		public string min_age { get; set; }
 		public string max_age { get; set; }
 		public int cost { get; set; }
 		public int sub { get; set; }
+		public GroupList(int id, int trainer_id, string trainer, string min, string max, int cost, int sub)
+		{
+			this.id = id;
+			this.trainer_id = trainer_id;
+			this.trainer = trainer;
+			this.min_age = min;
+			this.max_age = max;
+			this.cost = cost;
+			this.sub = sub;
+		}
 		public GroupList(int id, string trainer, string min, string max, int cost, int sub)
 		{
 			this.id = id;
