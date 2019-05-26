@@ -46,8 +46,8 @@ namespace Training_admin
 		"VALUES('" + fname + "', '" + sname + "', '" + pname + "', '" + birth + "', '" + mail + "', '" + login + "', '" + pass + "'); ", super.conn);
 					super.conn.Open();
 					comm.ExecuteNonQuery();
-					comm = new NpgsqlCommand("CREATE USER \"" + login + "\" WITH LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT - 1 PASSWORD '" + pass + "';" +
-					"GRANT \"Trainer\" TO \"" + login + "\"; ", super.conn);
+					comm = new NpgsqlCommand("CREATE USER \"trainer_" + login + "\" WITH LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT - 1 PASSWORD '" + pass + "';" +
+					"GRANT \"Trainer\" TO \"trainer_" + login + "\"; ", super.conn);
 					comm.ExecuteNonQuery();
 					Close();
 					super.conn.Close();

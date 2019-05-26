@@ -68,8 +68,8 @@ namespace Training_admin
 					conn.Open();
 					comm = new NpgsqlCommand(sql, conn);
 					comm.ExecuteNonQuery();
-					comm = new NpgsqlCommand("CREATE USER \"" + tb_login.Text + "\" WITH LOGIN NOSUPERUSER NOCREATEDB CREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT - 1 PASSWORD '" + tb_pass.Password + "';" +
-					"GRANT \"Admin\" TO \"" + tb_login.Text + "\";", conn);
+					comm = new NpgsqlCommand("CREATE USER \"admin_" + tb_login.Text + "\" WITH LOGIN NOSUPERUSER NOCREATEDB CREATEROLE INHERIT NOREPLICATION CONNECTION LIMIT - 1 PASSWORD '" + tb_pass.Password + "';" +
+					"GRANT \"Admin\" TO \"admin_" + tb_login.Text + "\";", conn);
 					comm.ExecuteNonQuery();
 					conn.Close();
 					Close();
@@ -111,7 +111,12 @@ namespace Training_admin
 					conn.Open();
 					comm = new NpgsqlCommand(sql, conn);
 					comm.ExecuteNonQuery();
-					comm = new NpgsqlCommand("ALTER USER \""+login+"\" RENAME TO \""+tb_login.Text+"\"; ALTER USER \""+tb_login.Text+"\" PASSWORD '"+tb_pass.Password+"'; ", conn);
+					if (login != tb_login.Text)
+					{
+						comm.CommandText = "ALTER USER \"admin_" + login + "\" RENAME TO \"admin_" + tb_login.Text + "\";";
+						comm.ExecuteNonQuery();
+					}
+					comm.CommandText = "ALTER USER \"admin_"+tb_login.Text+"\" PASSWORD '"+tb_pass.Password+"'; ";
 					comm.ExecuteNonQuery();
 					conn.Close();
 					profile.l_name.Content = tb_sname.Text + " " + tb_name.Text + " " + tb_pname.Text;

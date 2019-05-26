@@ -43,6 +43,9 @@
             </TabItem>
             <TabItem x:Name="tab_trainer" Header="Тренеры">
                 <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
                     <DataGrid x:Name="dg_trainer" Margin="0,0,0,45" FontSize="14" IsReadOnly="True" SelectionMode="Single" SelectedCellsChanged="Dg_trainer_SelectedCellsChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="id" Visibility="Collapsed"/>

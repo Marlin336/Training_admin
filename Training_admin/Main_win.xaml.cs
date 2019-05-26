@@ -29,7 +29,7 @@ namespace Training_admin
 			InitializeComponent();
 			this.super = super;
 			user_id = id;
-			string conn_str = "Server = 127.0.0.1; Port = 5432; User Id = " + login + "; Password = " + password + "; Database = Training;";
+			string conn_str = "Server = 127.0.0.1; Port = 5432; User Id = admin_" + login + "; Password = " + password + "; Database = Training;";
 			conn = new NpgsqlConnection(conn_str);
 			FillCustomerGrid();
 			FillTrainerGrid();
