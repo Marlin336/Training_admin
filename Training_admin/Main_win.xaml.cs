@@ -108,7 +108,9 @@ namespace Training_admin
 				reader = comm.ExecuteReader();
 				for (int i = 0; reader.Read(); i++)
 				{
-					GroupList item = new GroupList(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetInt32(5), reader.GetInt32(6));
+					int count;
+					try { count = reader.GetInt32(6); } catch { count = 0; }
+					GroupList item = new GroupList(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetInt32(5), count);
 					dg_group.Items.Add(item);
 				}
 			}
@@ -223,13 +225,25 @@ namespace Training_admin
 			if(MessageBox.Show("Вы уверенны что хотите удалить этого тренера из базы данных?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
 			{
 				TrainerList list = dg_trainer.SelectedItem as TrainerList;
-				string sql = "drop role \"" + list.login + "\"";
+				string sql = "drop role \"trainer_" + list.login + "\"";
 				NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
-				conn.Open();
-				comm.ExecuteNonQuery();
-				comm = new NpgsqlCommand("DELETE FROM public.trainer WHERE id = " + list.id + "; ", conn);
-				comm.ExecuteNonQuery();
-				conn.Close();
+				try
+				{
+					conn.Open();
+					comm.ExecuteNonQuery();
+					comm = new NpgsqlCommand("DELETE FROM public.trainer WHERE id = " + list.id + "; ", conn);
+					comm.ExecuteNonQuery();
+					UpdateTrainerGrid();
+				}
+				catch (NpgsqlException ex)
+				{
+					MessageBox.Show(ex.Message, "Ошибка на сервере", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+				}
+				finally { conn.Close(); }
 			}
 		}
 
