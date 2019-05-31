@@ -79,7 +79,9 @@ namespace Training_admin
 				NpgsqlDataReader reader = comm.ExecuteReader();
 				for (int i = 0; reader.Read(); i++)
 				{
-					GroupList item = new GroupList(reader.GetInt32(0), reader.GetString(2), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetInt32(5), reader.GetInt32(6));
+					int count;
+					try { count = reader.GetInt32(6); } catch { count = 0; }
+					GroupList item = new GroupList(reader.GetInt32(0), reader.GetString(2), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetInt32(5), count);
 					dg_trainer.Items.Add(item);
 				}
 			}

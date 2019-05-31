@@ -77,7 +77,7 @@ namespace Training_admin
 				for (int i = 0; reader.Read(); i++)
 				{
 					int count;
-					try { count = reader.GetInt32(7); } catch { count = 0; }
+					try { count = reader.GetInt32(8); } catch { count = 0; }
 					TrainerList item = new TrainerList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), (int)reader.GetDouble(5), reader.GetValue(6).ToString(), reader.GetString(7), count);
 					dg_trainer.Items.Add(item);
 				}
