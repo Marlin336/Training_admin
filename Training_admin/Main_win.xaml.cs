@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Npgsql;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Npgsql;
 
 namespace Training_admin
 {
@@ -24,6 +14,7 @@ namespace Training_admin
 		private bool logout { set; get; } = false;
 		public Login_win super { get; private set; }
 		public NpgsqlConnection conn;
+
 		public Main_win(Login_win super, int id, string login, string password)
 		{
 			InitializeComponent();
@@ -46,8 +37,7 @@ namespace Training_admin
 				reader = comm.ExecuteReader();
 				for (int i = 0; reader.Read(); i++)
 				{
-					CustomList item = new CustomList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), (int)reader.GetDouble(5), reader.GetValue(6).ToString(), reader.GetInt32(7), reader.GetBoolean(8));
-					dg_customer.Items.Add(item);
+					dg_customer.Items.Add(new CustomList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), (int)reader.GetDouble(5), reader.GetValue(6).ToString(), reader.GetInt32(7), reader.GetBoolean(8)));
 				}
 			}
 			catch (Exception ex)
@@ -61,11 +51,6 @@ namespace Training_admin
 			dg_customer.Items.Clear();
 			FillCustomerGrid();
 		}
-		private void Mb_re_cust_Click(object sender, RoutedEventArgs e)
-		{
-			UpdateCustomGrid();
-		}
-
 		private void FillTrainerGrid()
 		{
 			NpgsqlCommand comm = new NpgsqlCommand("select * from trainer_view_admin", conn);
@@ -76,10 +61,7 @@ namespace Training_admin
 				reader = comm.ExecuteReader();
 				for (int i = 0; reader.Read(); i++)
 				{
-					int count;
-					try { count = reader.GetInt32(8); } catch { count = 0; }
-					TrainerList item = new TrainerList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), (int)reader.GetDouble(5), reader.GetValue(6).ToString(), reader.GetString(7), count);
-					dg_trainer.Items.Add(item);
+					dg_trainer.Items.Add(new TrainerList(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetDate(4).ToString(), (int)reader.GetDouble(5), reader.GetValue(6).ToString(), reader.GetString(7), reader.GetInt32(8)));
 				}
 			}
 			catch (Exception ex)
@@ -93,11 +75,6 @@ namespace Training_admin
 			dg_trainer.Items.Clear();
 			FillTrainerGrid();
 		}
-		private void Mb_re_trainer_Click(object sender, RoutedEventArgs e)
-		{
-			UpdateTrainerGrid();
-		}
-
 		private void FillGroupGrid()
 		{
 			NpgsqlCommand comm = new NpgsqlCommand("select * from group_view_admin", conn);
@@ -108,10 +85,7 @@ namespace Training_admin
 				reader = comm.ExecuteReader();
 				for (int i = 0; reader.Read(); i++)
 				{
-					int count;
-					try { count = reader.GetInt32(6); } catch { count = 0; }
-					GroupList item = new GroupList(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetInt32(5), count);
-					dg_group.Items.Add(item);
+					dg_group.Items.Add(new GroupList(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetValue(3).ToString(), reader.GetValue(4).ToString(), reader.GetInt32(5), reader.GetInt32(6)));
 				}
 			}
 			catch (Exception ex)
@@ -125,11 +99,19 @@ namespace Training_admin
 			dg_group.Items.Clear();
 			FillGroupGrid();
 		}
+		#region events
+		private void Mb_re_cust_Click(object sender, RoutedEventArgs e)
+		{
+			UpdateCustomGrid();
+		}
+		private void Mb_re_trainer_Click(object sender, RoutedEventArgs e)
+		{
+			UpdateTrainerGrid();
+		}
 		private void Mb_re_group_Click(object sender, RoutedEventArgs e)
 		{
 			UpdateGroupGrid();
 		}
-
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			if (logout)
@@ -154,13 +136,11 @@ namespace Training_admin
 					e.Cancel = true;
 			}
 		}
-
 		private void B_exit_Click(object sender, RoutedEventArgs e)
 		{
 			logout = true;
 			Close();
 		}
-
 		private void Mb_add_Click(object sender, RoutedEventArgs e)
 		{
 			Money_win add_money = new Money_win(true, this)
@@ -169,7 +149,6 @@ namespace Training_admin
 			};
 			add_money.Show();
 		}
-
 		private void Mb_take_Click(object sender, RoutedEventArgs e)
 		{
 			Money_win take_money = new Money_win(false, this)
@@ -178,13 +157,11 @@ namespace Training_admin
 			};
 			take_money.Show();
 		}
-
 		private void Mb_log_view_Click(object sender, RoutedEventArgs e)
 		{
 			Log_win log = new Log_win(this);
 			log.Show();
 		}
-
 		private void B_profile_Click(object sender, RoutedEventArgs e)
 		{
 			NpgsqlCommand comm = new NpgsqlCommand("select sname||' '||fname||' '||pname, login from my_own_admin(" + user_id + ")", conn);
@@ -208,31 +185,27 @@ namespace Training_admin
 			}
 			conn.Close();
 		}
-
 		private void Mb_add_trainer_Click(object sender, RoutedEventArgs e)
 		{
 			Newtrainer_win win = new Newtrainer_win(this);
 			win.Show();
 		}
-
 		private void Dg_trainer_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
 		{
 			mb_del_trainer.IsEnabled = mb_trainer_groups.IsEnabled = dg_trainer.SelectedCells.Count != 0;
 		}
-
 		private void Mb_del_trainer_Click(object sender, RoutedEventArgs e)
 		{
 			if(MessageBox.Show("Вы уверенны что хотите удалить этого тренера из базы данных?", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
 			{
 				TrainerList list = dg_trainer.SelectedItem as TrainerList;
-				string sql = "drop role \"trainer_" + list.login + "\"";
+				string sql = "DROP ROLE \"trainer_" + list.login + "\"; DELETE FROM public.trainer WHERE id = " + list.id + ";";
 				NpgsqlCommand comm = new NpgsqlCommand(sql, conn);
 				try
 				{
 					conn.Open();
 					comm.ExecuteNonQuery();
-					comm = new NpgsqlCommand("DELETE FROM public.trainer WHERE id = " + list.id + "; ", conn);
-					comm.ExecuteNonQuery();
+					conn.Close();
 					UpdateTrainerGrid();
 				}
 				catch (NpgsqlException ex)
@@ -246,12 +219,10 @@ namespace Training_admin
 				finally { conn.Close(); }
 			}
 		}
-
 		private void Dg_customer_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
 		{
 			mb_money_op.IsEnabled = mb_cust_enter.IsEnabled = dg_customer.SelectedCells.Count != 0;
 		}
-
 		private void Mb_cust_enter_Click(object sender, RoutedEventArgs e)
 		{
 			CustomList sel_cust = dg_customer.SelectedItem as CustomList;
@@ -294,7 +265,6 @@ namespace Training_admin
 			}
 			finally { conn.Close(); }
 		}
-
 		private void Mb_trainer_groups_Click(object sender, RoutedEventArgs e)
 		{
 			TrainerList sel_tr = dg_trainer.SelectedItem as TrainerList;
@@ -304,15 +274,19 @@ namespace Training_admin
 			};
 			win.Show();
 		}
-
 		private void Mb_gr_subs_Click(object sender, RoutedEventArgs e)
 		{
 			GroupList sel_gr = dg_group.SelectedItem as GroupList;
 			View_win win = new View_win(this, typeof(GroupList), sel_gr.id)
 			{
-				Title = "Код группы: " + sel_gr.id
+				Title = "Код группы: " + sel_gr.id + " (" + sel_gr.trainer + ")"
 			};
 			win.Show();
 		}
+		private void Dg_group_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+		{
+			mb_gr_subs.IsEnabled = dg_group.SelectedItems.Count != 0;
+		}
+		#endregion
 	}
 }

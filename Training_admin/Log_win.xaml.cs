@@ -1,27 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Npgsql;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Npgsql;
 
 namespace Training_admin
 {
-    /// <summary>
-    /// Логика взаимодействия для Log_win.xaml
-    /// </summary>
-    public partial class Log_win : Window
+	/// <summary>
+	/// Логика взаимодействия для Log_win.xaml
+	/// </summary>
+	public partial class Log_win : Window
     {
 		public Main_win super { get; }
+
         public Log_win(Main_win super)
         {
             InitializeComponent();
@@ -103,7 +93,7 @@ namespace Training_admin
 			dg_transact.Items.Clear();
 			FillTransTable();
 		}
-
+		#region events
 		private void Dg_transact_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			TransactList item = dg_transact.SelectedItem as TransactList;
@@ -115,17 +105,14 @@ namespace Training_admin
 			read.Show();
 			super.conn.Close();
 		}
-
 		private void Mb_re_log_Click(object sender, RoutedEventArgs e)
 		{
 			UpdateLog();
 		}
-
 		private void Mb_re_transact_log_Click(object sender, RoutedEventArgs e)
 		{
 			UpdateTransact();
 		}
-
 		private void Dg_log_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			Dispatcher.BeginInvoke((Action)(() => tab_panel.SelectedItem = tab_transact));
@@ -141,5 +128,6 @@ namespace Training_admin
 				}
 			}
 		}
+		#endregion
 	}
 }

@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Npgsql;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Npgsql;
 
 namespace Training_admin
 {
@@ -27,12 +16,12 @@ namespace Training_admin
 		string pname = null;
 		string login = null;
 		string pass = null;
+
 		public Reg_win()
 		{
 			InitializeComponent();
 			b_reg.Click += B_reg_Click;
 		}
-
 		public Reg_win(Profile_win profile, int id, string fname, string sname, string pname, string login, string pass)
 		{
 			InitializeComponent();
@@ -47,7 +36,7 @@ namespace Training_admin
 			tb_pass.Password = this.pass = pass;
 			tb_repass.Password = pass;
 		}
-
+		#region events
 		//  При регистрации нового профиля
 		private void B_reg_Click(object sender, RoutedEventArgs e)
 		{
@@ -92,7 +81,6 @@ namespace Training_admin
 			else
 				MessageBox.Show("Пароли не совпадают", "Ошибка подтверждение пароля", MessageBoxButton.OK, MessageBoxImage.Warning);
 		}
-
 		// При редактировании профиля
 		private void B_edit_Click(object sender, RoutedEventArgs e)
 		{
@@ -131,10 +119,10 @@ namespace Training_admin
 			else
 				MessageBox.Show("Пароли не совпадают", "Ошибка подтверждение пароля", MessageBoxButton.OK, MessageBoxImage.Warning);
 		}
-
 		private void Tb_pass_GotFocus(object sender, RoutedEventArgs e)
 		{
 			tb_repass.Clear();
 		}
+		#endregion
 	}
 }

@@ -69,7 +69,7 @@
             </TabItem>
             <TabItem x:Name="tab_group" Header="Группы">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_group" Margin="0,0,0,45" FontSize="14" IsReadOnly="True" SelectionMode="Single">
+                    <DataGrid x:Name="dg_group" Margin="0,0,0,45" FontSize="14" IsReadOnly="True" SelectionMode="Single" SelectedCellsChanged="Dg_group_SelectedCellsChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="Код группы"/>
                             <DataGridTextColumn Binding="{Binding trainer_id}" Header="tr_id" Visibility="Collapsed"/>
@@ -81,7 +81,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <Menu Background="#FFE5E5E5" Height="40" VerticalAlignment="Bottom">
-                        <MenuItem x:Name="mb_gr_subs" Header="Список подписавшихся" FontSize="14" Height="40" Click="Mb_gr_subs_Click"/>
+                        <MenuItem x:Name="mb_gr_subs" Header="Список подписавшихся" FontSize="14" Height="40" IsEnabled="False" Click="Mb_gr_subs_Click"/>
                         <MenuItem x:Name="mb_re_group" Header="Обновить список" FontSize="14" Height="40" Click="Mb_re_group_Click"/>
                     </Menu>
                 </Grid>

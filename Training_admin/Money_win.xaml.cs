@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Npgsql;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Npgsql;
 
 namespace Training_admin
 {
@@ -23,6 +12,7 @@ namespace Training_admin
 		Main_win super { get; }
 		CustomList list { get; }
 		private bool adding { get; }//true - добавление на счёт, false - снятие со счёта
+
 		public Money_win(bool adding, Main_win super)
 		{
 			InitializeComponent();

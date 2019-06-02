@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Npgsql;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Npgsql;
 
 namespace Training_admin
 {
@@ -22,6 +12,7 @@ namespace Training_admin
 	{
 		Main_win super { get; }
 		int id { get; }
+
 		public View_win(Main_win super, Type type, int id)
 		{
 			InitializeComponent();
@@ -68,7 +59,6 @@ namespace Training_admin
 			}
 			finally { super.conn.Close(); }
 		}
-
 		private void FillTableTrainer()
 		{
 			string sql = "select * from group_view_admin where trainer_id = " + id + "";
@@ -95,7 +85,6 @@ namespace Training_admin
 			}
 			finally { super.conn.Close(); }
 		}
-
 		private void FillTableGroup()
 		{
 			string sql = "select cva.sname, cva.fname, cva.pname, cva.birthday, cva.age, cva.mail, cva.deposit, cva.customer_in "+
@@ -124,31 +113,34 @@ namespace Training_admin
 
 		private void Dg_customer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			GroupList group = dg_customer.SelectedItem as GroupList;
-			string sql = "CALL public.reg_entrance(" + id + ", " + group.id + ", " + super.user_id + ", " + group.cost + ", 'Оплата посещения занятия')";
-			NpgsqlCommand comm = new NpgsqlCommand(sql, super.conn);
-			try
+			if (dg_customer.SelectedItem != null)
 			{
-				super.conn.Open();
-				comm.ExecuteNonQuery();
-				super.conn.Close();
-				Close();
-			}
-			catch (NpgsqlException ex)
-			{
-				if (ex.ErrorCode == -2147467259)
-					MessageBox.Show("Недостаточно денег на счету", "Ошибка на сервере", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-				else
-					MessageBox.Show(ex.Message, "Ошибка на сервере", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
-			}
-			finally
-			{
-				super.conn.Close();
-				super.UpdateCustomGrid();
+				GroupList group = dg_customer.SelectedItem as GroupList;
+				string sql = "CALL public.reg_entrance(" + id + ", " + group.id + ", " + super.user_id + ", " + group.cost + ", 'Оплата посещения занятия')";
+				NpgsqlCommand comm = new NpgsqlCommand(sql, super.conn);
+				try
+				{
+					super.conn.Open();
+					comm.ExecuteNonQuery();
+					super.conn.Close();
+					Close();
+				}
+				catch (NpgsqlException ex)
+				{
+					if (ex.ErrorCode == -2147467259)
+						MessageBox.Show("Недостаточно денег на счету", "Ошибка на сервере", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+					else
+						MessageBox.Show(ex.Message, "Ошибка на сервере", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+				}
+				finally
+				{
+					super.conn.Close();
+					super.UpdateCustomGrid();
+				}
 			}
 		}
 	}

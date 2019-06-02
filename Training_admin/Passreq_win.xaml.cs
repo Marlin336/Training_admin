@@ -1,28 +1,18 @@
 ﻿using Npgsql;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Training_admin
 {
-    /// <summary>
-    /// Логика взаимодействия для Passreq_win.xaml
-    /// </summary>
-    public partial class Passreq_win : Window
+	/// <summary>
+	/// Логика взаимодействия для Passreq_win.xaml
+	/// </summary>
+	public partial class Passreq_win : Window
     {
 		int user_id;
 		Profile_win profile { get; }
 		public Main_win super { get; }
+
         public Passreq_win(Main_win super, Profile_win profile ,int id)
         {
             InitializeComponent();
