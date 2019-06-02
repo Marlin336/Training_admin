@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="View_win" Height="450" Width="797.404">
     <Grid>
-        <DataGrid x:Name="dg_customer" FontSize="14" IsReadOnly="True" SelectionMode="Single" Visibility="Collapsed" MouseDoubleClick="Dg_customer_MouseDoubleClick">
+        <DataGrid x:Name="dg_customer" Margin="10" FontSize="14" IsReadOnly="True" SelectionMode="Single" Visibility="Collapsed" MouseDoubleClick="Dg_customer_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Header="Код группы"/>
                 <DataGridTextColumn Binding="{Binding trainer}" Header="Тренер"/>
@@ -17,7 +17,7 @@
                 <DataGridTextColumn Binding="{Binding sub}" Header="Кол-во участников"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="dg_trainer" FontSize="14" IsReadOnly="True" SelectionMode="Single" Visibility="Collapsed">
+        <DataGrid x:Name="dg_trainer" Margin="10" FontSize="14" IsReadOnly="True" SelectionMode="Single" Visibility="Collapsed">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Header="Код группы"/>
                 <DataGridTextColumn Binding="{Binding min_age}" Header="Мин. возраст"/>
@@ -26,7 +26,7 @@
                 <DataGridTextColumn Binding="{Binding sub}" Header="Кол-во участников"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid x:Name="dg_group" FontSize="14" IsReadOnly="True" SelectionMode="Single" Visibility="Collapsed">
+        <DataGrid x:Name="dg_group" Margin="10" FontSize="14" IsReadOnly="True" SelectionMode="Single" Visibility="Collapsed">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding sname}" Header="Фамилия"/>
                 <DataGridTextColumn Binding="{Binding fname}" Header="Имя"/>

@@ -8,6 +8,5 @@
         Title="Чтение" Height="450" Width="800">
     <Grid>
         <TextBlock x:Name="tb_read" Margin="10" TextWrapping="Wrap" FontSize="14"/>
-
     </Grid>
 </Window>
