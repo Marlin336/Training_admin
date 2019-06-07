@@ -29,7 +29,7 @@ namespace Training_admin
 
 		private void FillCustomerGrid()
 		{
-			NpgsqlCommand comm = new NpgsqlCommand("select * from customer_view_admin", conn);
+			NpgsqlCommand comm = new NpgsqlCommand("select * from customer_view", conn);
 			NpgsqlDataReader reader;
 			try
 			{
@@ -77,7 +77,7 @@ namespace Training_admin
 		}
 		private void FillGroupGrid()
 		{
-			NpgsqlCommand comm = new NpgsqlCommand("select * from group_view_admin", conn);
+			NpgsqlCommand comm = new NpgsqlCommand("select * from group_view", conn);
 			NpgsqlDataReader reader;
 			try
 			{

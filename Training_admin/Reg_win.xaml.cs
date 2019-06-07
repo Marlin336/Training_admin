@@ -44,8 +44,8 @@ namespace Training_admin
 			{
 				string conn_param = "Server=127.0.0.1;Port=5432;User Id=Training_login;Password=0000;Database=Training;";
 				string sql = "INSERT INTO public.admin(" +
-	"first_name, second_name, parent_name, login, pass)" +
-	"VALUES('" + tb_name.Text.Trim() + "', '" + tb_sname.Text.Trim() + "', '" + tb_pname.Text.Trim() + "', '" + tb_login.Text + "', '" + tb_pass.Password + "');";
+				"first_name, second_name, parent_name, login, pass)" +
+				"VALUES('" + tb_name.Text.Trim() + "', '" + tb_sname.Text.Trim() + "', '" + tb_pname.Text.Trim() + "', '" + tb_login.Text + "', '" + tb_pass.Password + "');";
 				NpgsqlConnection conn = new NpgsqlConnection(conn_param);
 				NpgsqlCommand comm;
 				try

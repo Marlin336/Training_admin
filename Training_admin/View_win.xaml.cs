@@ -61,7 +61,7 @@ namespace Training_admin
 		}
 		private void FillTableTrainer()
 		{
-			string sql = "select * from group_view_admin where trainer_id = " + id + "";
+			string sql = "select * from group_view where trainer_id = " + id + "";
 			NpgsqlCommand comm = new NpgsqlCommand(sql, super.conn);
 			try
 			{
@@ -88,7 +88,7 @@ namespace Training_admin
 		private void FillTableGroup()
 		{
 			string sql = "select cva.sname, cva.fname, cva.pname, cva.birthday, cva.age, cva.mail, cva.deposit, cva.customer_in "+
-				"from customer_view_admin as cva, \"customer-customer_group\" as ccg where cva.id = ccg.id_customer and ccg.id_group = " + id + "";
+				"from customer_view as cva, \"customer-customer_group\" as ccg where cva.id = ccg.id_customer and ccg.id_group = " + id;
 			NpgsqlCommand comm = new NpgsqlCommand(sql, super.conn);
 			try
 			{
