@@ -238,10 +238,8 @@ namespace Training_admin
 					comm = new NpgsqlCommand("select cust_in_gr from log_view where customer_id = " + sel_cust.id + " and out_time is null", conn);
 					conn.Open();
 					int cust_id = (int)comm.ExecuteScalar();
-					conn.Close();
-					sql = "UPDATE public.log SET out_time = '" + DateTime.Now.ToLongTimeString() + "' WHERE id_customer_in_group = " + cust_id + " and out_time is null; ";
-					comm = new NpgsqlCommand(sql, conn);
-					conn.Open();
+					sql = "UPDATE public.log SET out_time = current_time(0) WHERE id_customer_in_group = " + cust_id + " and out_time is null; ";
+					comm.CommandText = sql;
 					comm.ExecuteNonQuery();
 					conn.Close();
 					UpdateCustomGrid();
