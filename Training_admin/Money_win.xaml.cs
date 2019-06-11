@@ -19,14 +19,29 @@ namespace Training_admin
 			this.adding = adding;
 			this.super = super;
 			list = super.dg_customer.SelectedItem as CustomList;
-			NpgsqlCommand comm = new NpgsqlCommand("select sname||' '||fname||' '||pname from my_own_admin(" + super.user_id + ")", super.conn);
-			super.conn.Open();
-			string admin = comm.ExecuteScalar().ToString();
-			comm = new NpgsqlCommand("select sname||' '||fname||' '||pname from customer_view_admin where id = " + list.id + "", super.conn);
-			string cust = comm.ExecuteScalar().ToString();
-			super.conn.Close();
-			l_admin.Content += admin;
-			l_cust.Content += cust;
+			try
+			{
+				NpgsqlCommand comm = new NpgsqlCommand("select sname||' '||fname||' '||pname from my_own_admin(" + super.user_id + ")", super.conn);
+				super.conn.Open();
+				string admin = comm.ExecuteScalar().ToString();
+				comm = new NpgsqlCommand("select sname||' '||fname||' '||pname from customer_view where id = " + list.id + "", super.conn);
+				string cust = comm.ExecuteScalar().ToString();
+				super.conn.Close();
+				l_admin.Content += admin;
+				l_cust.Content += cust;
+			}
+			catch (NpgsqlException ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка на сервере", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+			}
+			finally
+			{
+				super.conn.Close();
+			}
 		}
 
 		private void B_accept_Click(object sender, RoutedEventArgs e)
